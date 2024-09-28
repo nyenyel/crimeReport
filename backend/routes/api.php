@@ -16,12 +16,14 @@ Route::prefix('v1')->group(function () {
         Route::post('login', [AuthController::class, 'login']);
         Route::middleware(['auth:sanctum'])->group(function (){
             Route::get('user', function (Request $request) {
-                return UserResource::make($request->user()->load([
+                $user = $request->user();
+                $user->load([
                     'role',
                     'gender',
                     'location',
                     'rank'
-                ]));
+                ]);
+                return UserResource::make($user);
             });
         });
     });

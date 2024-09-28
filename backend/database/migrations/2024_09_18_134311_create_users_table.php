@@ -24,14 +24,14 @@ return new class extends Migration
             $table->string('phone_no');
             $table->string('badge_no');
             $table->unsignedBigInteger('location_id');
-            $table->unsignedBigInteger('lib_role_id');
             $table->unsignedBigInteger('lib_gender_id');
             $table->unsignedBigInteger('lib_station_id');
+            $table->unsignedBigInteger('lib_role_id');
             $table->unsignedBigInteger('lib_rank_id');
             $table->foreign('location_id')->references('id')->on('locations');
-            $table->foreign('lib_role_id')->references('id')->on('lib_roles');
             $table->foreign('lib_gender_id')->references('id')->on('lib_genders');
             $table->foreign('lib_station_id')->references('id')->on('lib_stations');
+            $table->foreign('lib_role_id')->references('id')->on('lib_roles');
             $table->foreign('lib_rank_id')->references('id')->on('lib_ranks');
             $table->rememberToken();
             $table->timestamps();
