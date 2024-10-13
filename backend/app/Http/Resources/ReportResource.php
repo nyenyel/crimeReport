@@ -16,13 +16,14 @@ class ReportResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'title' => $this->id,
-            'desc' => $this->id,
-            'reporter_name' => $this->id,
-            'evidence' => $this->id,
+            'title' => $this->title,
+            'desc' => $this->desc,
+            'created_at' => $this->created_at,
+            'reporter_name' => $this->reporter_name,
             'status' => new LibraryResource($this->whenLoaded('status')),
             'category' => new LibraryResource($this->whenLoaded('category')),
             'location' => new LocationResource($this->whenLoaded('location')),
+            'evidence' => EvidenceResource::collection($this->whenLoaded('image'))
         ];
     }
 }

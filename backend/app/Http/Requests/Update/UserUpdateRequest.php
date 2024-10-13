@@ -21,20 +21,22 @@ class UserUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->route('user')->id;
         return [
-            'username' => 'sometimes|string|unique:users,username',
-            'password' => 'sometimes|string|min:6',
-            'email' => 'sometimes|string|unique:users,email',
-            'first_name' => 'sometimes|string',
-            'last_name' => 'sometimes|string',
-            'middle_name' => 'sometimes|string',
-            'badge_no' => 'sometimes|string',
-            'phone_no' => 'sometimes|string',
+            'username' => 'required|string|unique:users,username,'.$id,
+            'password' => 'sometimes|nullable|string|min:6|confirmed',
+            'email' => 'required|email|string|unique:users,email,'.$id,
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'middle_name' => 'required|string',
+            'badge_no' => 'required|string',
+            'phone_no' => 'required|string',
             'location_id' => 'sometimes|integer',
             'lib_role_id' => 'sometimes|integer',
             'lib_gender_id' => 'sometimes|integer',
             'lib_rank_id' => 'sometimes|integer',
             'lib_station_id' => 'sometimes|integer',
+            'isVerified' => 'sometimes',
         ];
     }
 }

@@ -23,10 +23,11 @@ class UserResource extends JsonResource
             'middle_name' => $this->middle_name,
             'phone_no' => $this->phone_no,
             'badge_no' => $this->badge_no,
+            'isVerified' => $this->isVerified,
             'location' => new LocationResource($this->whenLoaded('location')),
             'role' => new LibraryResource($this->whenLoaded('role')),
             'gender' => new LibraryResource($this->whenLoaded('gender')),
-            'station' => $this->lib_station_id,
+            'station' => new StationResource($this->whenLoaded('station')),
             'rank' => new LibraryResource($this->whenLoaded('rank')),
         ];
     }

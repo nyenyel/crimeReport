@@ -24,8 +24,8 @@ class StationStoreRequest extends FormRequest
         return [
             'info.address' => 'required',
             'info.lib_station_status_id' => 'required|integer',
-            'location.long' => 'required|numeric|between:-90,90',
-            'location.lat' => 'required|numeric|between:-180,180'
+            'location.long' => 'required|numeric',
+            'location.lat' => 'required|numeric'
         ];
     }
 }

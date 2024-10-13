@@ -37,6 +37,7 @@ class User extends Authenticatable
         'lib_gender_id',
         'lib_station_id',
         'lib_rank_id',
+        'isVerified'
     ];
 
     /**

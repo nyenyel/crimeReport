@@ -11,8 +11,12 @@ export default function SideBar() {
                 </div>
                 <div className='bg-white w-full mb-4 h-0.5 bg-opacity-20' />
                 <div className=' mb-6'>
-                    <div className='mx-6 font-bold text-xs mb-5'>OVERVIEW</div>
-                    <NavLink to={'dashboard'} className=' flex content-center px-6 '>
+                    <div className='mx-6 font-bold text-xs mb-3'>OVERVIEW</div>
+                    <NavLink to={'dashboard'} 
+                        className={({ isActive }) => {
+                            return `rounded-xl flex content-center px-6 ${isActive && 'border-b-2 bg-src pt-2 mx-4'}`
+                        }}
+                    >
                         <div className='content-center font-extrabold'>
                         <span className="icon-[iconamoon--arrow-right-2-duotone] h-8 w-8"></span>
 
@@ -24,9 +28,12 @@ export default function SideBar() {
                     </NavLink>
                 </div>
                 <div className='bg-white w-full mb-4 h-0.5 bg-opacity-20' />
-                <div className=' mb-6'>
-                    <div className='mx-6 font-bold text-xs mb-5'>CRIME REPORT</div>
-                    <NavLink to={'report'} className=' flex content-center px-6 mb-5 '>
+                <div className=' mb-6 flex flex-col gap-2'>
+                    <div className='mx-6 font-bold text-xs mb-2 '>CRIME REPORT</div>
+                    <NavLink to={'report'} className={({ isActive }) => {
+                            return `rounded-xl flex content-center px-6 ${isActive && 'border-b-2 bg-src pt-2 mx-4'}`
+                        }}
+                    >
                         <div className='content-center font-extrabold'>
                             <span className="icon-[iconamoon--arrow-right-2-duotone] h-8 w-8"></span>
                         </div>
@@ -35,16 +42,22 @@ export default function SideBar() {
                         </div>
                         <div className=' mt-0.5 font-semibold text-lg'>Report</div>
                     </NavLink>
-                    <NavLink to={'dispatch'} className=' flex content-center px-6 '>
+                    <NavLink to={'dispatch'} className={({ isActive }) => {
+                            return `rounded-xl flex content-center px-6 ${isActive && 'border-b-2 bg-src pt-2 mx-4'}`
+                        }}
+                    >
                         <div className='content-center font-extrabold'>
                             <span className="icon-[iconamoon--arrow-right-2-duotone] h-8 w-8"></span>
                         </div>
                         <div className='mr-2 content-center'>
                             <span className="icon-[ph--police-car-fill] h-7 w-7"></span>
                         </div>
-                        <div className=' mt-0.5 font-semibold text-lg'>Dispatch</div>
+                        <div className=' mt-0.5 font-semibold text-lg'>Dispatched</div>
                     </NavLink>
-                    <NavLink to={'declined'} className=' my-5 flex content-center px-6 '>
+                    <NavLink to={'declined'} className={({ isActive }) => {
+                            return `rounded-xl flex content-center px-6 ${isActive && 'border-b-2 bg-src pt-2 mx-4'}`
+                        }}
+                    >
                         <div className='content-center font-extrabold'>
                             <span className="icon-[iconamoon--arrow-right-2-duotone] h-8 w-8"></span>
                         </div>
@@ -53,7 +66,10 @@ export default function SideBar() {
                         </div>
                         <div className=' mt-0.5 font-semibold text-lg'>Declined</div>
                     </NavLink>
-                    <NavLink to={'accepted'} className=' flex content-center px-6 '>
+                    <NavLink to={'accepted'} className={({ isActive }) => {
+                            return `rounded-xl flex content-center px-6 ${isActive && 'border-b-2 bg-src pt-2 mx-4'}`
+                        }}
+                    >
                         <div className='content-center font-extrabold'>
                             <span className="icon-[iconamoon--arrow-right-2-duotone] h-8 w-8"></span>
                         </div>
@@ -64,9 +80,12 @@ export default function SideBar() {
                     </NavLink>
                 </div>
                 <div className='bg-white w-full mb-4 h-0.5 bg-opacity-20' />
-                <div className=' mb-6'>
-                    <div className='mx-6 font-bold text-xs mb-5'>MANAGEMENT</div>
-                    <NavLink to={'user'} className=' flex content-center px-6 '>
+                <div className=' mb-6 flex flex-col gap-2'>
+                    <div className='mx-6 font-bold text-xs mb-2'>MANAGEMENT</div>
+                    <NavLink to={'user'} className={({ isActive }) => {
+                            return `rounded-xl flex content-center px-6 ${isActive && 'border-b-2 bg-src pt-2 mx-4'}`
+                        }}
+                    >
                         <div className='content-center font-extrabold'>
                             <span className="icon-[iconamoon--arrow-right-2-duotone] h-8 w-8"></span>
                         </div>
@@ -75,7 +94,10 @@ export default function SideBar() {
                         </div>
                         <div className=' mt-0.5 font-semibold text-lg'>User</div>
                     </NavLink>
-                    <NavLink to={'station'} className=' my-5 flex content-center px-6 '>
+                    <NavLink to={'station'} className={({ isActive }) => {
+                            return `rounded-xl flex content-center px-6 ${isActive && 'border-b-2 bg-src pt-2 mx-4'}`
+                        }}
+                    >
                         <div className='content-center font-extrabold'>
                             <span className="icon-[iconamoon--arrow-right-2-duotone] h-8 w-8"></span>
                         </div>
@@ -86,9 +108,12 @@ export default function SideBar() {
                     </NavLink>
                 </div>
                 <div className='bg-white w-full mb-4 h-0.5 bg-opacity-20' />
-                <div className=' mb-6'>
-                    <div className='mx-6 font-bold text-xs mb-5'>ACCOUNT</div>
-                    <NavLink to={'profile'} className=' flex content-center px-6 '>
+                <div className=' mb-6 flex flex-col gap-2'>
+                    <div className='mx-6 font-bold text-xs mb-2'>ACCOUNT</div>
+                    <NavLink to={'profile'} className={({ isActive }) => {
+                            return `rounded-xl flex content-center px-6 ${isActive && 'border-b-2 bg-src pt-2 mx-4'}`
+                        }}
+                    >
                         <div className='content-center font-extrabold'>
                             <span className="icon-[iconamoon--arrow-right-2-duotone] h-8 w-8"></span>
                         </div>
@@ -97,7 +122,7 @@ export default function SideBar() {
                         </div>
                         <div className=' mt-0.5 font-semibold text-lg'>Profile</div>
                     </NavLink>
-                    <NavLink to={'logout'} className=' my-5 flex content-center px-6 '>
+                    <NavLink to={'logout'} className='flex content-center px-6 '>
                         <div className='content-center font-extrabold'>
                             <span className="icon-[iconamoon--arrow-right-2-duotone] h-8 w-8"></span>
                         </div>

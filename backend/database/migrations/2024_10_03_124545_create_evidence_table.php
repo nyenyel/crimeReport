@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -12,16 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('locations', function (Blueprint $table) {
+        Schema::create('evidence', function (Blueprint $table) {
             $table->id();
-            $table->double('long');
-            $table->double('lat');
+            $table->unsignedBigInteger('report_id');
+            $table->string('image');
+            $table->foreign('report_id')->references('id')->on('reports');
             $table->timestamps();
         });
-        DB::table('locations')->insert([
-            ['long' => 0, 'lat' => 0],
-            ['long' => 0, 'lat' => 0],
-        ]);
     }
 
     /**
@@ -29,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('locations');
+        Schema::dropIfExists('evidence');
     }
 };

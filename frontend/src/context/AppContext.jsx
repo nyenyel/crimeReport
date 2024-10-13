@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { createContext, useEffect, useState } from 'react'
-import { auth } from '../resource/api'
+import { auth, baseURL } from '../resource/api'
 
 export const AppContext = createContext()
 
@@ -9,6 +9,24 @@ export default function AppProvider({children}) {
     const [role, setRole] =useState(localStorage.getItem('role'))
     const [user, setUser] =useState()
 
+    const prod = "https://crime-report.io/"
+    const apiClient = axios.create({
+        baseURL: `${baseURL}api/`,
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    apiClient.interceptors.request.use(
+        (config) => {
+            const token = localStorage.getItem('token')
+            if(token){
+                config.headers['Authorization'] = `Bearer ${token}`
+            }
+            return config
+        }, (error) => {
+            return Promise.reject(error)
+        }
+    )
     const getUser = async () => {
         try{
             const response = await axios.get(auth.concat('user'), {
@@ -35,7 +53,7 @@ export default function AppProvider({children}) {
     }, [token])
     return (
         <>
-            <AppContext.Provider value={{ token, role, user, setToken, setRole, setUser }}>
+            <AppContext.Provider value={{ token, role, user, setToken, setRole, setUser, apiClient }}>
                 {children}
             </AppContext.Provider>
         </>

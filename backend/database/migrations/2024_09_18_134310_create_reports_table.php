@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('desc');
             $table->string('reporter_name');
-            $table->string('evidence');
+            $table->string('evidence')->nullable();
             $table->timestamp('date_time');
             $table->unsignedBigInteger('lib_status_id');
             $table->unsignedBigInteger('lib_category_id');

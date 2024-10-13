@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->string('middle_name');
             $table->string('phone_no');
             $table->string('badge_no');
+            $table->boolean('isVerfied')->default(false);
             $table->unsignedBigInteger('location_id');
             $table->unsignedBigInteger('lib_gender_id');
             $table->unsignedBigInteger('lib_station_id');
@@ -40,7 +42,7 @@ return new class extends Migration
         DB::table('users')->insert([
             'username' => 'admin',
             'email' => 'admin@example.com',
-            'password' => 'admin123',
+            'password' => Hash::make('admin123'),
             'first_name' => 'Super',
             'last_name' => 'Admin',
             'middle_name' => 'PNP',
@@ -51,7 +53,7 @@ return new class extends Migration
             'lib_gender_id' => 1,
             'lib_station_id' => 1,
             'lib_rank_id' => 1,
-            
+            'isVerified' => true
         ]);
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

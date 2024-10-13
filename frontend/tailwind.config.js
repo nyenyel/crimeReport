@@ -13,6 +13,10 @@ export default {
         'dw': '#E4E4E4',
         'text': '#3A3A3A',
         'sec-text': '#E4E4E4'
+      },
+      scale: {
+        '101': '1.006',
+        '99': '0.99',
       }
     },
   },

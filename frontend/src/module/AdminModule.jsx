@@ -12,7 +12,7 @@ export default function AdminModule() {
             <div className='sticky top-0 h-full overflow-y-auto'>
                 <SideBar />
             </div>
-            <div className='flex-1 ml-4 py-4'>
+            <div className='flex-1 ml-4 py-4 pr-6'>
                 <Outlet />
             </div>
         </div>

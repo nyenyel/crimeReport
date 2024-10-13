@@ -4,6 +4,7 @@ use App\Http\Controllers\api\v1\AuthController;
 use App\Http\Controllers\api\v1\Library\LibCategoryController;
 use App\Http\Controllers\api\v1\Library\LibRankController;
 use App\Http\Controllers\api\v1\Library\LibStationController;
+use App\Http\Controllers\api\v1\Library\LibStatusController;
 use App\Http\Controllers\api\v1\ReportController;
 use App\Http\Controllers\api\v1\UserController;
 use App\Http\Resources\UserResource;
@@ -21,7 +22,8 @@ Route::prefix('v1')->group(function () {
                     'role',
                     'gender',
                     'location',
-                    'rank'
+                    'rank',
+                    'station.location'
                 ]);
                 return UserResource::make($user);
             });
@@ -39,6 +41,7 @@ Route::prefix('v1')->group(function () {
             Route::apiResource('report', ReportController::class)->only(['update']);
             Route::apiResource('station', LibStationController::class)->except(['index', 'show']);
             Route::apiResource('user', UserController::class);
+            Route::apiResource('status', LibStatusController::class);
             Route::put('location/{location}', [AuthController::class, 'changeLocation']);
 
         });

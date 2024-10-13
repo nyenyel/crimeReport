@@ -22,8 +22,8 @@ class ChangeLocationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'long' => 'required|numeric|between:-90,90',
-            'lat' => 'required|numeric|between:-180,180',
+            'long' => 'required|numeric',
+            'lat' => 'required|numeric',
         ];
     }
 }

@@ -45,9 +45,23 @@ class UserController extends Controller
      */
     public function update(UserUpdateRequest $request, User $user)
     {
-        $user->update($request->validated());
+        $data = $request->validated();
+        if($data['password']=== null){
+            $data['password'] = bcrypt($user->password); 
+        }
+
+        $user->update($data);
         $user->load($this->relation);
-        return UserResource::make($user);
+        return response()->json(['res' => $data]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(User $user)
+    {
+        $user->delete();
+        return response()->json(['message' => 'Data Deleted']);
     }
 
 }
