@@ -14,6 +14,7 @@ import ProfileOutlet from '../outlet/ProfileOutlet'
 import ReportOutlet from '../outlet/ReportOutlet'
 import UserProfileOutlet from '../outlet/UserProfileOutlet'
 import UserVerifyOutlet from '../outlet/UserVerifyOutlet'
+import NewStationOutlet from '../outlet/NewStationOutlet'
 
 
 export const router = createBrowserRouter([
@@ -75,6 +76,11 @@ export const router = createBrowserRouter([
         {
           path: 'station',
           element: <StationOutlet />,
+          errorElement: <ErrorComponent />,
+        },
+        {
+          path: 'station/new',
+          element: <NewStationOutlet />,
           errorElement: <ErrorComponent />,
         },
         {

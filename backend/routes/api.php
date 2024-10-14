@@ -23,7 +23,8 @@ Route::prefix('v1')->group(function () {
                     'gender',
                     'location',
                     'rank',
-                    'station.location'
+                    'station.location',
+                    'station.status',
                 ]);
                 return UserResource::make($user);
             });
@@ -43,7 +44,6 @@ Route::prefix('v1')->group(function () {
             Route::apiResource('user', UserController::class);
             Route::apiResource('status', LibStatusController::class);
             Route::put('location/{location}', [AuthController::class, 'changeLocation']);
-
         });
     });
 });
