@@ -1,8 +1,23 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Logo from './Logo'
 import { NavLink } from 'react-router-dom'
+import { AppContext } from '../context/AppContext'
 
 export default function SideBar() {
+    const {apiClient} =useContext(AppContext)
+    const logout = (e) => {
+        e.preventDefault()
+        const logout =  async () => {
+            try {
+                const response = await apiClient.post('v1/auth/logout', {})
+                localStorage.removeItem('token')
+                localStorage.removeItem('role')
+            } catch (error) {
+                console.error("Error: ", error)
+            } 
+        } 
+        logout()
+    }
     return (
         <>
             <div className='bg-prc text-sec-text rounded-r-2xl h-screen min-w-72'>
@@ -122,7 +137,7 @@ export default function SideBar() {
                         </div>
                         <div className=' mt-0.5 font-semibold text-lg'>Profile</div>
                     </NavLink>
-                    <NavLink to={'logout'} className='flex content-center px-6 '>
+                    <div onClick={logout} className='flex cursor-pointer content-center px-6 '>
                         <div className='content-center font-extrabold'>
                             <span className="icon-[iconamoon--arrow-right-2-duotone] h-8 w-8"></span>
                         </div>
@@ -130,7 +145,7 @@ export default function SideBar() {
                             <span className="icon-[majesticons--door-exit] h-7 w-7"></span>
                         </div>
                         <div className=' mt-0.5 font-semibold text-lg'>Logout</div>
-                    </NavLink>
+                    </div>
                 </div>
                 {/* <div className='bg-white w-full mb-4 h-0.5 bg-opacity-20' /> */}
             </div>

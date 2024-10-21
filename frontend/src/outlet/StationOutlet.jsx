@@ -1,14 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react'
 import LoginRedirect from '../component/LoginRedirect'
 import { AppContext } from '../context/AppContext'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import Loading from '../component/Loading'
 
 export default function StationOutlet() {
+  const navigate = useNavigate()
   const {apiClient ,user} = useContext(AppContext)
   const [data, setData] = useState()
   const [loading, setLoading] = useState(false)
-  const getUsers = async() =>{
+  const getStation = async() =>{
     setLoading(true)
     try{
       const response = await apiClient.get(`v1/crud/station`)
@@ -19,15 +20,28 @@ export default function StationOutlet() {
       setLoading(false)
     }
   }
+  const updateStatus = async () => {
+    try {
+      setLoading(true)
+      const response = await apiClient.put(`v1/crud/status-station/${user?.data?.station?.id}`)
+      navigate(0)
+    } catch (error) {
+      console.error("Error: ", error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleClick = () => updateStatus()
   useEffect(()=> {
-    getUsers()
+    getStation()
   }, [])
   return (
     <>
     <LoginRedirect/>
     {loading && <Loading />}
         <div className=''>
-            <div className='flex pr-6 pt-4 text-prc font-light text-3xl mb-2'>
+            <div className='flex  pt-4 text-prc font-light text-3xl mb-2'>
                 <div className='flex-1'/>
                 PNP Station Management
             </div>
@@ -48,7 +62,7 @@ export default function StationOutlet() {
                   <div className='content-center'>
                     Status:
                   </div>
-                  <div className='bg-prc hover:scale-105 cursor-pointer select-none px-3 py-1 rounded-md text-white'>{user?.data?.station?.status?.desc}</div>
+                  <div onClick={handleClick} className='bg-prc hover:scale-105 cursor-pointer select-none px-3 py-1 rounded-md text-white'>{user?.data?.station?.status?.desc}</div>
                 </div>
               </div>
               <NavLink to={'new'} className='flex flex-col items-center justify-center rounded-md bg-prc text-white text-2xl p-5 select-none cursor-pointer font-bold hover:scale-101'>
@@ -100,7 +114,14 @@ export default function StationOutlet() {
                               {item?.status?.desc}
                             </td>
                             <td className="px-6 py-4 text-right">
-                              <NavLink to={`verify/${item?.id}`} className="font-medium text-white px-4 py-2 bg-src rounded-md mr-4 hover:bg-opacity-85">Edit</NavLink>
+                              <NavLink 
+                                to={{
+                                  pathname: `modify/${item?.id}`,
+                                  state: { itemData: 'asd' }
+                                }} 
+                               className="font-medium text-white px-4 py-2 bg-src rounded-md mr-4 hover:bg-opacity-85">
+                                Edit
+                              </NavLink>
                             </td>
                         </tr>
                       ))}

@@ -6,6 +6,7 @@ import Loading from '../component/Loading'
 import bgImage from '../resource/bg.jpg'
 import { crud } from '../resource/api'
 import axios from 'axios'
+import { NavLink } from 'react-router-dom'
 
 
 export default function PublicModule() {
@@ -74,7 +75,9 @@ export default function PublicModule() {
 
             <div className='relative flex-1 flex justify-end'>
                 <div className='flex-1 bg-gradient-to-l from-src to-prc rounded-r-lg p-10 text-sec-text flex flex-col justify-center z-10'>
-                    <Logo />
+                    <NavLink to={'login'}>
+                        <Logo />
+                    </NavLink>
                     <div className='mt-6 text-4xl font-bold '>Crime Report</div>
                     <div className='mt-1 text-lg mb-5 '>Please describe the crime your reporting.</div>
 

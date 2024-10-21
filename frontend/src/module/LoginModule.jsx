@@ -4,7 +4,7 @@ import Loading from '../component/Loading'
 import axios from 'axios'
 import { auth } from '../resource/api'
 import { AppContext } from '../context/AppContext'
-import { useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import AlreadyLoginRedirect from '../component/AlreadyLoginRedirect'
 import bgImage from '../resource/bg.jpg'
 
@@ -57,7 +57,9 @@ export default function LoginModule() {
             <div className='relative flex-1 flex justify-end'>
                 <div className='flex-1'></div>
                 <div className='flex-1 bg-gradient-to-l from-src to-prc rounded-lg p-10 text-sec-text flex flex-col justify-center z-10'>
-                    <Logo />
+                    <NavLink to={'/'}>
+                        <Logo />
+                    </NavLink>
                     <div className='mt-14 text-4xl font-bold '>Welcome</div>
                     <div className='mt-1 text-lg mb-10 '>Please enter your email and password to login!</div>
 
@@ -80,7 +82,7 @@ export default function LoginModule() {
                         </div>
                         <div className='flex mt-4'>
                         <div className='opacity-80 text-sm mr-1'>Does not have an Account?</div>
-                        <div className='opacity-80 text-sm underline'>Register Now</div>
+                        <NavLink to={'/register'} className='opacity-80 text-sm underline'>Register Now</NavLink>
                         </div>
                         <button type='submit' className='w-full bg-src py-2 rounded-md mt-4'>Login</button>
                     </form>

@@ -59,8 +59,6 @@ export default function ProfileOutlet() {
 
     useEffect(() => {
         if (user) {
-            console.log(user.data)
-
             setNewDataForm({
                 username: user?.data.username,
                 password: '',
@@ -85,7 +83,7 @@ export default function ProfileOutlet() {
     <LoginRedirect/>
     {loading && <Loading />}
     <div className=''>
-        <div className='flex pr-6 pt-4 text-prc font-light text-3xl mb-2'>
+        <div className='flex  pt-4 text-prc font-light text-3xl mb-2'>
             <div className='flex-1'/>
             User Profile
         </div>

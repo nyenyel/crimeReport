@@ -15,6 +15,7 @@ import ReportOutlet from '../outlet/ReportOutlet'
 import UserProfileOutlet from '../outlet/UserProfileOutlet'
 import UserVerifyOutlet from '../outlet/UserVerifyOutlet'
 import NewStationOutlet from '../outlet/NewStationOutlet'
+import RegisterModule from '../module/RegisterModule'
 
 
 export const router = createBrowserRouter([
@@ -26,6 +27,11 @@ export const router = createBrowserRouter([
     {
       path: 'login',
       element: <LoginModule />,
+      errorElement: <ErrorComponent />
+    },
+    {
+      path: 'register',
+      element: <RegisterModule />,
       errorElement: <ErrorComponent />
     },
     {
@@ -80,6 +86,11 @@ export const router = createBrowserRouter([
         },
         {
           path: 'station/new',
+          element: <NewStationOutlet />,
+          errorElement: <ErrorComponent />,
+        },
+        {
+          path: 'station/modify/:id',
           element: <NewStationOutlet />,
           errorElement: <ErrorComponent />,
         },

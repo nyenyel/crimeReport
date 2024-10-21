@@ -27,13 +27,13 @@ export default function UserOutlet() {
     <LoginRedirect/>
     {loading && <Loading />}
         <div className=''>
-            <div className='flex pr-6 pt-4 text-prc font-light text-3xl mb-2'>
+            <div className='flex pt-4 text-prc font-light text-3xl mb-2'>
                 <div className='flex-1'/>
                 User Management
             </div>
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table className="w-full text-sm text-left text-gray-500">
-                    <caption className="p-5 text-lg font-semibold text-left text-white bg-prc ">
+                    <caption className="p-5  text-lg font-semibold text-left text-white bg-prc ">
                         PNP System Users
                         <p className="mt-1 text-sm font-normal text-white text-opacity-90 ">Browse the list of verifed and to be verfied PNP users.</p>
                     </caption>

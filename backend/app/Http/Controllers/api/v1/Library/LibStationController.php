@@ -52,9 +52,11 @@ class LibStationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StationUpdateRequest $request, LibStation $station)
+    public function update(StationStoreRequest $request, LibStation $station)
     {
-        $station->update($request->validated());
+        $data = $request->validated();
+        $station->update($data['info']);
+        $station->location->update($data['location']);
         $station->load($this->relation);
         return StationResource::make($station);
     }
@@ -66,5 +68,11 @@ class LibStationController extends Controller
     {
         $station->delete();
         return response()->json(['message'=> 'Data Deleted']);
+    }
+
+    public function statusStation(LibStation $station){
+        $station->lib_station_status_id === 1 ? $data = 2 : $data = 1;
+        $station->update(['lib_station_status_id' => $data]);
+        return response()->json(['msg' => 'Station Updated']);
     }
 }

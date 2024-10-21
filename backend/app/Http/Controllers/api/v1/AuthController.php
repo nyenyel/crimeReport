@@ -46,6 +46,13 @@ class AuthController extends Controller
         return $this->loginService->checkCredential($user);
     }
 
+    public function logout(Request $request){
+        $request->user()->tokens()->delete();
+        return response()->json([
+            'message' => 'You are logged out'
+        ]);
+    }
+
     public function changeLocation(ChangeLocationRequest $request, User $location){
         $location->location->update($request->validated());
         return LocationResource::make($location->location);

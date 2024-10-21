@@ -21,8 +21,6 @@ export default function AcceptedReportCard({data, user, token, index}) {
     const reportLong = data?.location?.long
     const stationLat = user?.data?.station?.location?.lat
     const stationLong = user?.data?.station?.location?.long
-    console.log(stationLat)
-    console.log(stationLong)
     
     // Format date and time
     const formattedDate = dateObject.toLocaleDateString('en-US', {
