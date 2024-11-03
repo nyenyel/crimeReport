@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import LoginRedirect from '../component/LoginRedirect'
 import AlreadyLoginRedirect from '../component/AlreadyLoginRedirect'
 import Logo from '../component/Logo'
@@ -7,11 +7,30 @@ import bgImage from '../resource/bg.jpg'
 import { crud } from '../resource/api'
 import axios from 'axios'
 import { NavLink } from 'react-router-dom'
+import { getCurrentLocation } from './LoginModule'
 
 
 export default function PublicModule() {
     const [loading, setLoading] = useState(false)
     const [selectedFiles, setSelectedFiles] = useState([]);
+    const [location,setLocation] = useState([]);
+
+    const currentLocation = async () => {
+        try{
+            setLoading(true)
+
+            const data = await getCurrentLocation()
+            setLocation(data)
+        } catch {
+            console.log("error")
+        } finally {
+            setLoading(false)
+        }
+    }
+    useEffect(()=> {
+        currentLocation()
+    }, [])
+
     const[reportForm, setReportForm] = useState({
         info: {
             lib_status_id: 1,
@@ -21,8 +40,8 @@ export default function PublicModule() {
             category: '',
         },
         location: {
-            long: '4.32',
-            lat: '7.32',
+            long: location?.long,
+            lat: location?.lat,
         },
         evidence: []
     })
@@ -33,8 +52,14 @@ export default function PublicModule() {
             info: {
                 ...prev.info,
                 [name]: value
+            }, 
+            location: {
+                ...prev.location,
+                long: location.long,
+                lat: location.lat,
             }
         }));
+
     }
     const handleFileChange = (event) => {
         setReportForm((prev) => ({
@@ -61,8 +86,10 @@ export default function PublicModule() {
                 // navigate('/admin')
             }
         }
-        login()
+        // login()
+        console.log(reportForm)
     }
+
     return (
         <>
         {loading && (<Loading />)}

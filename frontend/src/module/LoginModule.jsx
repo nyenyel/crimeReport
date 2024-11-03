@@ -114,7 +114,7 @@ export default function LoginModule() {
 }
 
 
-function getCurrentLocation() {
+export function getCurrentLocation() {
     return new Promise((resolve, reject) => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
