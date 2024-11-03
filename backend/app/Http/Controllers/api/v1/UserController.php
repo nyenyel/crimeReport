@@ -63,5 +63,10 @@ class UserController extends Controller
         $user->delete();
         return response()->json(['message' => 'Data Deleted']);
     }
-
+    public function getPNP()
+    {
+        $data = User::where('lib_role_id', 2)->where('isVerified', true)->get();
+        $data->load($this->relation);
+        return UserResource::collection($data);
+    }
 }

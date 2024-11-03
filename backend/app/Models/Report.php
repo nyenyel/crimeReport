@@ -22,6 +22,7 @@ class Report extends Model
         'lib_status_id',
         'lib_category_id',
         'location_id',
+        'dispatch_user'
     ];
 
     public function status() : BelongsTo {
@@ -35,5 +36,8 @@ class Report extends Model
     }
     public function image(): HasMany {
         return $this->hasMany(Evidence::class, 'report_id');
+    }
+    public function user(): BelongsTo {
+        return $this->belongsTo(User::class, 'dispatch_user');
     }
 }

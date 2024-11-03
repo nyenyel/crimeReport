@@ -22,7 +22,8 @@ class ReportUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'lib_status_id' => 'required'
+            'lib_status_id' => 'required',
+            'dispatch_user' => 'nullable'
         ];
     }
 }

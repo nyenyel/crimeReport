@@ -9,6 +9,7 @@ import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+import { useNavigate } from 'react-router-dom';
 // import './MapComponent.css'; // Your custom styles
 
 
@@ -17,6 +18,7 @@ export default function AcceptedReportCard({data, user, token, index}) {
     const dateObject = new Date(dateString)
     const [loading, setLoading] = useState(false)
     const [distance, setDistance] = useState('')
+    const nav = useNavigate();
     const reportLat = data?.location?.lat
     const reportLong = data?.location?.long
     const stationLat = user?.data?.station?.location?.lat
@@ -45,16 +47,16 @@ export default function AcceptedReportCard({data, user, token, index}) {
     const handleReportUpdate = async (action) => {
         setLoading(true)
         try{
-            const response = await axios.put(
-                crud.concat(`report/${data?.id}`), //endpoint
-                {lib_status_id: `${action}`},
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    }
-                }
-            )
+            // const response = await axios.put(
+            //     crud.concat(`report/${data?.id}`), //endpoint
+            //     {lib_status_id: `${action}`},
+            //     {
+            //         headers: {
+            //             'Content-Type': 'application/json',
+            //         }
+            //     }
+            // )
+            nav(`${data?.id}`, {state: data})
         } catch (e) {
             console.error("Error: ",e)
         } finally {

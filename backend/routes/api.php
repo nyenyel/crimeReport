@@ -26,6 +26,10 @@ Route::prefix('v1')->group(function () {
                     'rank',
                     'station.location',
                     'station.status',
+                    'dispatch',
+                    'dispatch.location',
+                    'dispatch.status',
+                    'dispatch.category',
                 ]);
                 return UserResource::make($user);
             });
@@ -46,6 +50,10 @@ Route::prefix('v1')->group(function () {
             Route::apiResource('status', LibStatusController::class);
             Route::put('location/{location}', [AuthController::class, 'changeLocation']);
             Route::put('status-station/{station}', [LibStationController::class, 'statusStation']);
+            Route::get('get-pnp', [UserController::class, 'getPNP']);
+            Route::get('pnp-report/{user}', [ReportController::class, 'pnpReport']);
+            Route::get('pnp-resolved/{user}', [ReportController::class, 'pnpResolved']);
+            Route::get('pnp-unresolved/{user}', [ReportController::class, 'pnpUnresolved']);
         });
     });
 });

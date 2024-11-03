@@ -10,6 +10,7 @@ use App\Models\Library\LibRole;
 use App\Models\Library\LibStation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -77,5 +78,14 @@ class User extends Authenticatable
     }
     public function rank() :BelongsTo{
         return $this->belongsTo(LibRank::class, 'lib_rank_id');
+    }
+    public function dispatch(): HasMany {
+        return $this->hasMany(Report::class, 'dispatch_user');
+    }
+    public function resolved(): HasMany {
+        return $this->hasMany(Report::class, 'dispatch_user')->where('lib_status_id', 5);
+    }
+    public function unResolved(): HasMany {
+        return $this->hasMany(Report::class, 'dispatch_user')->where('lib_status_id', 4);
     }
 }

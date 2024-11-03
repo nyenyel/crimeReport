@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('middle_name');
             $table->string('phone_no');
             $table->string('badge_no');
-            $table->boolean('isVerfied')->default(false);
+            $table->boolean('isVerified')->default(false);
             $table->unsignedBigInteger('location_id');
             $table->unsignedBigInteger('lib_gender_id');
             $table->unsignedBigInteger('lib_station_id');

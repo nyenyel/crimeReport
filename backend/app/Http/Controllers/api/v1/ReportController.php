@@ -10,6 +10,7 @@ use App\Models\Evidence;
 use App\Models\Library\LibCategory;
 use App\Models\Location;
 use App\Models\Report;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -92,5 +93,22 @@ class ReportController extends Controller
     {
         $report->delete();
         return response()->json(['message' => 'Data Deleted']);
+    }
+    public function pnpReport (User $user){
+        $reports = $user->dispatch;
+        $reports->load($this->relation);
+        return ReportResource::collection($reports);
+    }
+
+    public function pnpResolved (User $user){
+        $reports = $user->resolved;
+        $reports->load($this->relation);
+        return ReportResource::collection($reports);
+    }
+
+    public function pnpUnresolved (User $user){
+        $reports = $user->unResolved;
+        $reports->load($this->relation);
+        return ReportResource::collection($reports);
     }
 }

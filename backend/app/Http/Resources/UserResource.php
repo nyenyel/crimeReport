@@ -29,6 +29,7 @@ class UserResource extends JsonResource
             'gender' => new LibraryResource($this->whenLoaded('gender')),
             'station' => new StationResource($this->whenLoaded('station')),
             'rank' => new LibraryResource($this->whenLoaded('rank')),
+            'dispatch'=> ReportResource::collection($this->whenLoaded('dispatch'))
         ];
     }
 }
