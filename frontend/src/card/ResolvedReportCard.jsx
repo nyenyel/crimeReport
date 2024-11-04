@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Loading from '../component/Loading'
 import { crud } from '../resource/api'
 import axios from 'axios'
@@ -9,19 +9,23 @@ import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+import { useNavigate } from 'react-router-dom';
+import { AppContext } from '../context/AppContext';
 // import './MapComponent.css'; // Your custom styles
 
 
-export default function DispatchedReportCard({data, user, token, index}) {
+export default function ResolvedReportCard({data, user, token, index}) {
     const dateString = data?.created_at
     const dateObject = new Date(dateString)
     const [loading, setLoading] = useState(false)
     const [distance, setDistance] = useState('')
+    const {apiClient} = useContext(AppContext)
+    const nav = useNavigate();
     const reportLat = data?.location?.lat
     const reportLong = data?.location?.long
-    const stationLat =  user?.data?.role?.desc === 'Admin' ? user?.data?.station?.location?.lat : user?.data?.location?.lat
-    const stationLong = user?.data?.role?.desc === 'Admin' ? user?.data?.station?.location?.long : user?.data?.location?.long
-
+    const stationLat = user?.data?.location?.lat
+    const stationLong = user?.data?.location?.long
+    
     // Format date and time
     const formattedDate = dateObject.toLocaleDateString('en-US', {
         month: 'short', 
@@ -43,6 +47,7 @@ export default function DispatchedReportCard({data, user, token, index}) {
         setSelectedImage('');
     };
 
+
     useEffect(() => {
         // Check if all required coordinates are defined and valid numbers
         if (
@@ -51,10 +56,9 @@ export default function DispatchedReportCard({data, user, token, index}) {
             typeof reportLat === 'number' &&
             typeof reportLong === 'number'
         ) {
-            
             const map = L.map(`map-${index}`, {
                 center: [stationLat, stationLong],
-                zoom: 10,
+                zoom: 13,
             });
     
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -114,7 +118,7 @@ export default function DispatchedReportCard({data, user, token, index}) {
             <div className='text-sm '>{formattedDate} - {formattedTime}</div>
             <div className='text-sm '>Distance: {distance} km</div>
         </div>
-        <div className='bg-text h-96 text-white text-center bg-opacity-50 flex flex-wrap'>
+        <div className='bg-text h-56 text-white text-center bg-opacity-50 flex flex-wrap'>
             <div id={`map-${index}`} className='w-full'/>
         </div>
     </div>

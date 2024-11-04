@@ -16,6 +16,12 @@ import UserProfileOutlet from '../outlet/UserProfileOutlet'
 import UserVerifyOutlet from '../outlet/UserVerifyOutlet'
 import NewStationOutlet from '../outlet/NewStationOutlet'
 import RegisterModule from '../module/RegisterModule'
+import Loading from '../component/Loading'
+import PNPModule from '../module/PNPModule'
+import SelectPNPOutlet from '../outlet/SelectPNPOutlet'
+import PNPDashboardOutlet from '../outlet/PNP/PNPDashboardOutlet'
+import PNPDispatchedOutlet from '../outlet/PNP/PNPDispatchedOutlet'
+import PNPResolvedOutlet from '../outlet/PNP/PNPResolvedOutlet'
 
 
 export const router = createBrowserRouter([
@@ -27,6 +33,11 @@ export const router = createBrowserRouter([
     {
       path: 'login',
       element: <LoginModule />,
+      errorElement: <ErrorComponent />
+    },
+    {
+      path: 'loading',
+      element: <Loading />,
       errorElement: <ErrorComponent />
     },
     {
@@ -65,6 +76,11 @@ export const router = createBrowserRouter([
           errorElement: <ErrorComponent />,
         },
         {
+          path: 'accepted/:id',
+          element: <SelectPNPOutlet />,
+          errorElement: <ErrorComponent />,
+        },
+        {
           path: 'user',
           element: <UserOutlet />,
           errorElement: <ErrorComponent />,
@@ -92,6 +108,37 @@ export const router = createBrowserRouter([
         {
           path: 'station/modify/:id',
           element: <NewStationOutlet />,
+          errorElement: <ErrorComponent />,
+        },
+        {
+          path: 'profile',
+          element: <ProfileOutlet />,
+          errorElement: <ErrorComponent />,
+        },
+        {
+          index: true,
+          element: <Navigate to={'dashboard'} replace/>
+        }
+      ]
+    },
+    {
+      path: 'pnp',
+      element: <PNPModule />,
+      errorElement: <ErrorComponent />,
+      children: [
+        {
+          path: 'dashboard',
+          element: <PNPDashboardOutlet />,
+          errorElement: <ErrorComponent />,
+        },
+        {
+          path: 'dispatch',
+          element: <PNPDispatchedOutlet />,
+          errorElement: <ErrorComponent />,
+        },
+        {
+          path: 'resolved',
+          element: <PNPResolvedOutlet />,
           errorElement: <ErrorComponent />,
         },
         {

@@ -2,16 +2,18 @@
 import Logo from '../component/Logo'
 import Loading from '../component/Loading'
 import axios from 'axios'
-import { auth } from '../resource/api'
+import { auth, crud } from '../resource/api'
 import { AppContext } from '../context/AppContext'
 import { NavLink, useNavigate } from 'react-router-dom'
 import AlreadyLoginRedirect from '../component/AlreadyLoginRedirect'
 import bgImage from '../resource/bg.jpg'
+import L from 'leaflet';
 
 export default function LoginModule() {
     const navigate = useNavigate()
     const {setToken} = useContext(AppContext) 
     const [loading, setLoading] = useState(false)
+    const [message, setMessage] = useState()
     const [loginForm, setLoginForm] = useState({
         email: '',
         password: ''
@@ -33,13 +35,30 @@ export default function LoginModule() {
                         'Content-Type': 'application/json'
                     }
                 })
-                setToken(response.data.token)
-                localStorage.setItem('token', response.data.token)
+
+
+                const myLocation = await getCurrentLocation(); // Await the promise
+                const location = await axios.put(
+                    crud.concat(`location/${response.data.user.id}`),
+                    myLocation,
+                    {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${response.data.token}`
+                        }
+                    }
+                );
+
+                if (response.data.token) {
+                    setToken(response.data.token);
+                    localStorage.setItem('token', response.data.token);
+                }
+                navigate(`/${response.data.user.role.desc}`)
             } catch (e){
                 console.log("Error: ", e)
+                setMessage(e.response.data.message)
             } finally {
                 setLoading(false)
-                navigate('/admin')
             }
         }
         login()
@@ -65,6 +84,7 @@ export default function LoginModule() {
 
                     <form className='max-w-96 w-full' onSubmit={handleSubmmit}>
                         <div className='flex flex-col'>
+                            {message && <div className='text-src text-sm mb-2'>{message}</div>}
                         <input
                             onChange={handleChange}
                             type='text'
@@ -91,4 +111,24 @@ export default function LoginModule() {
         </div>
     </>
     )
+}
+
+
+export function getCurrentLocation() {
+    return new Promise((resolve, reject) => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const lat = position.coords.latitude;
+                    const long = position.coords.longitude;
+                    resolve({ lat, long }); // Resolve the promise with the location
+                },
+                (error) => {
+                    resolve({ lat: 0, long: 0 }); // Resolve with default values on error
+                }
+            );
+        } else {
+            resolve({ lat: 1, long: 1 }); // Handle case where geolocation is not supported
+        }
+    });
 }

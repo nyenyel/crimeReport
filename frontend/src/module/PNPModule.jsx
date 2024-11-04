@@ -5,9 +5,9 @@ import { AppContext } from '../context/AppContext'
 import LoginRedirect from '../component/LoginRedirect'
 import AlreadyLoginRedirect from '../component/AlreadyLoginRedirect'
 
-export default function AdminModule() {
-    const {role} = useContext (AppContext)
-    if(role !== 'Admin' && role){
+export default function PNPModule() {
+    const {role} = useContext(AppContext)
+    if(role !== 'PNP' && role){
         return (
             <AlreadyLoginRedirect />
         )
