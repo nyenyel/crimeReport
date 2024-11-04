@@ -75,8 +75,8 @@ export default function RegisterModule() {
                     <NavLink to={'/'}>
                         <Logo />
                     </NavLink>
-                    <div className='mt-14 text-4xl font-bold '>Register</div>
-                    <div className='mt-1 text-lg mb-10 '>Please enter your credentials!</div>
+                    <div className='mt-1 text-4xl font-bold '>Register</div>
+                    <div className='mt-1 text-lg mb-4 '>Please enter your credentials!</div>
 
                     <form className='flex flex-col text-white' onSubmit={handleSubmit} >
                         <div className='flex flex-col'>
