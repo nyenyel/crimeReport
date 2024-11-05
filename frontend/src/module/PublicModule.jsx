@@ -86,7 +86,7 @@ export default function PublicModule() {
                 // navigate('/admin')
             }
         }
-        // login()
+        login()
         console.log(reportForm)
     }
 
