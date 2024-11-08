@@ -40,6 +40,8 @@ Route::prefix('v1')->group(function () {
         Route::apiResource('rank', LibRankController::class)->only(['index', 'show']);
         Route::apiResource('report', ReportController::class)->except(['update']);
         Route::apiResource('station', LibStationController::class)->only(['index', 'show']);
+        Route::post('my-report', [ReportController::class, 'myReport']);
+
 
         Route::middleware(['auth:sanctum'])->group(function(){
             Route::apiResource('lib-category', LibCategoryController::class)->except(['index','show']);
@@ -54,6 +56,7 @@ Route::prefix('v1')->group(function () {
             Route::get('pnp-report/{user}', [ReportController::class, 'pnpReport']);
             Route::get('pnp-resolved/{user}', [ReportController::class, 'pnpResolved']);
             Route::get('pnp-unresolved/{user}', [ReportController::class, 'pnpUnresolved']);
+            Route::get('dashboard', [ReportController::class, 'dashboard']);
         });
     });
 });

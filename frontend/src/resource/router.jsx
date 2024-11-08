@@ -22,17 +22,24 @@ import SelectPNPOutlet from '../outlet/SelectPNPOutlet'
 import PNPDashboardOutlet from '../outlet/PNP/PNPDashboardOutlet'
 import PNPDispatchedOutlet from '../outlet/PNP/PNPDispatchedOutlet'
 import PNPResolvedOutlet from '../outlet/PNP/PNPResolvedOutlet'
+import CrimeProvider from '../context/CrimeContext'
+import TrackerModule from '../module/TrackerModule'
 
 
 export const router = createBrowserRouter([
     {
       path: '/',
-      element: <PublicModule />,
+      element: <CrimeProvider><PublicModule /></CrimeProvider>,
       errorElement: <ErrorComponent />
     },
     {
       path: 'login',
       element: <LoginModule />,
+      errorElement: <ErrorComponent />
+    },
+    {
+      path: ':code',
+      element: <TrackerModule />,
       errorElement: <ErrorComponent />
     },
     {
