@@ -52,7 +52,7 @@ export default function SideBar() {
                     </div>
                     <div className='bg-white w-full mb-4 h-0.5 bg-opacity-20' />
                     <div className=' mb-6 flex flex-col gap-2'>
-                        <div className='mx-6 font-bold text-xs mb-2 '>CRIME REPORT</div>
+                        <div className='mx-6 font-bold text-xs mb-2 '>CRIME MANAGEMENT</div>
                         <NavLink to={'report'} className={({ isActive }) => {
                                 return `rounded-xl flex content-center px-6 ${isActive && 'border-b-2 bg-src pt-2 mx-4'}`
                             }}
@@ -104,7 +104,7 @@ export default function SideBar() {
                     </div>
                     <div className='bg-white w-full mb-4 h-0.5 bg-opacity-20' />
                     <div className=' mb-6 flex flex-col gap-2'>
-                        <div className='mx-6 font-bold text-xs mb-2'>MANAGEMENT</div>
+                        <div className='mx-6 font-bold text-xs mb-2'>SYSTEM MANAGEMENT</div>
                         <NavLink to={'user'} className={({ isActive }) => {
                                 return `rounded-xl flex content-center px-6 ${isActive && 'border-b-2 bg-src pt-2 mx-4'}`
                             }}
@@ -187,7 +187,7 @@ export default function SideBar() {
                     </div>
                     <div className='bg-white w-full mb-4 h-0.5 bg-opacity-20' />
                     <div className=' mb-6 flex flex-col gap-2'>
-                        <div className='mx-6 font-bold text-xs mb-2 '>CRIME REPORT</div>
+                        <div className='mx-6 font-bold text-xs mb-2 '>CRIME MANAGEMENT</div>
                         <NavLink to={'dispatch'} className={({ isActive }) => {
                                 return `rounded-xl flex content-center px-6 ${isActive && 'border-b-2 bg-src pt-2 mx-4'}`
                             }}

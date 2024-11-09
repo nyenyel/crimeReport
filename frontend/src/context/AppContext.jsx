@@ -1,6 +1,8 @@
 import axios from 'axios'
 import React, { createContext, useEffect, useState } from 'react'
 import { auth, baseURL } from '../resource/api'
+import Cookie from 'js-cookie'
+
 
 export const AppContext = createContext()
 
@@ -9,18 +11,20 @@ export default function AppProvider({children}) {
     const [role, setRole] =useState(localStorage.getItem('role'))
     const [user, setUser] =useState()
 
-    const prod = "https://crime-report.io/"
     const apiClient = axios.create({
         baseURL: `${baseURL}api/`,
+        withCredentials: true, 
         headers: {
+            'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
             'Content-Type': 'application/json'
         }
     })
     apiClient.interceptors.request.use(
         (config) => {
-            const token = localStorage.getItem('token')
-            if(token){
+            const token = localStorage.getItem('token'); // Get token from localStorage
+            if (token) {
                 config.headers['Authorization'] = `Bearer ${token}`
+                config.headers['X-XSRF-TOKEN'] = getCookie('XSRF-TOKEN')// Set the token dynamically
             }
             return config
         }, (error) => {
@@ -58,4 +62,8 @@ export default function AppProvider({children}) {
             </AppContext.Provider>
         </>
     )
+}
+
+const getCookie = (cookieName) => {
+    return Cookie.get(cookieName)
 }

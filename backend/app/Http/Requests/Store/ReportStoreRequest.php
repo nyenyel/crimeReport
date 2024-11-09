@@ -25,6 +25,7 @@ class ReportStoreRequest extends FormRequest
             'info.title' => 'required|string',
             'info.desc'=> 'required|string',
             'info.reporter_name'=> 'required|string',
+            'info.address' => 'required|string',
             'info.lib_status_id'=> 'required|integer',
             'info.category'=> 'required|string',
             'location.long' => 'required|numeric',

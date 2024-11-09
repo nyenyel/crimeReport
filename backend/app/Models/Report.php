@@ -22,7 +22,11 @@ class Report extends Model
         'lib_status_id',
         'lib_category_id',
         'location_id',
-        'dispatch_user'
+        'dispatch_user',
+        'address',
+        'id_verification',
+        'code',
+        'password'
     ];
 
     public function status() : BelongsTo {
