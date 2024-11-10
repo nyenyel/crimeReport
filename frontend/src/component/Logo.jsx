@@ -15,9 +15,9 @@ export default function Logo() {
         <div className='flex text-sec-text'>
         <img src={pnpLogo} className='h-14 w-auto'/>
         <div className='ml-2 text-xl -mt-2 content-center'>
-            <div className='font-bold'>Takla</div>
-            <div className='text-sm'>Patakla</div>
-            <div className='text-sm'>Kang Buguk</div>
+            <div className='font-bold'>PNP</div>
+            <div className='text-sm'>Pambansang Pulisya </div>
+            <div className='text-sm'>Ng Pilipinas</div>
         </div>
     </div>
     </>

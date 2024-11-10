@@ -195,7 +195,12 @@ export default function PublicModule() {
         <>
             <div className="absolute z-50 bg-black w-full h-full bg-opacity-60 flex items-center justify-center">
                 <div className="bg-prc drop-shadow text-md font-bold p-5 text-white rounded-md">
-                    The report has been successfully submitted!
+                    <div className='flex'>
+                        <div className='flex-1'>   
+                            The report has been successfully submitted!
+                        </div>
+                        <div className='cursor-pointer font-thin -mt-1 hover:scale-105' onClick={handleModal}>x</div>
+                    </div>
                     <div className='mt-2 text-sm font-normal'>To track your report save this link and password before reloading or exiting</div>
                     <div className='mt-2 text-sm font-normal'>Link</div>
                     <div className='text-sm font-normal bg-white text-prc p-4 rounded-md'>{`http://localhost:5173/${reportTracker.code}`}</div>
@@ -211,8 +216,9 @@ export default function PublicModule() {
                 className='absolute -inset-4 bg-cover bg-no-repeat blur-md'
                 style={{ backgroundImage: `url(${bgImage})` }}
             ></div>
-
-            <div className='relative flex-1 flex justify-end'>
+            <div className='flex-1'></div>
+            {/* <div className='relative flex-1 flex justify-center'> */}
+            <div className="flex min-h-screen justify-center items-center">
                 <div className='flex-1 bg-gradient-to-l from-src to-prc rounded-r-lg p-10 text-sec-text flex flex-col justify-center z-10'>
                     <NavLink to={'login'}>
                         <Logo />

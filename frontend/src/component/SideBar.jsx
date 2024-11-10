@@ -19,7 +19,7 @@ export default function SideBar() {
                 console.error("Error: ", error)
             } finally {
                 setLoading(false)
-                nav(0)
+                nav('/login')
             } 
         } 
         logoutAcc()

@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
 import { crud } from '../resource/api'
 import Loading from '../component/Loading'
+import bgImage from '../resource/bg.jpg'
+
 
 export default function TrackerModule() {
     const {code} = useParams()
@@ -62,24 +64,32 @@ export default function TrackerModule() {
         {state.loading && <Loading />}
         {state?.data === null ? (
             <div className="absolute  bg-black w-full h-full bg-opacity-60 flex items-center justify-center">
-            <div className="bg-prc drop-shadow text-md font-bold p-5 text-white rounded-md">
-                This page is for report tracking!
-                <div className='mt-2 text-sm font-normal'>To track your report please enter the password</div>
-                <div className='mt-2 text-sm font-normal'>Password</div>
-                <input onKeyDown={handleSubmit} onChange={handleChange} name='password' type='password' className='rounded-md p-2 font-normal text-prc w-full' placeholder='Please Enter your password'/>
-                {state.error !==null  &&<label className='text-sm font-normal text-red-600'>{state?.error}</label>}
+                <div
+                    className='absolute -inset-4 bg-cover bg-no-repeat blur-md'
+                    style={{ backgroundImage: `url(${bgImage})` }}
+                ></div>
+                <div className="bg-prc drop-shadow text-md font-bold p-5 text-white rounded-md">
+                    This page is for report tracking!
+                    <div className='mt-2 text-sm font-normal'>To track your report please enter the password</div>
+                    <div className='mt-2 text-sm font-normal'>Password</div>
+                    <input onKeyDown={handleSubmit} onChange={handleChange} name='password' type='password' className='rounded-md p-2 font-normal text-prc w-full' placeholder='Please Enter your password'/>
+                    {state.error !==null  &&<label className='text-sm font-normal text-red-600'>{state?.error}</label>}
             </div>
         </div>
         ):(
         <div className="absolute z-50 bg-black w-full h-full bg-opacity-60 flex items-center justify-center">
-            <div className="bg-prc drop-shadow text-md font-bold p-5 text-white rounded-md">
+            <div
+                className='absolute -inset-4 bg-cover bg-no-repeat blur-md'
+                style={{ backgroundImage: `url(${bgImage})` }}
+            ></div>
+            <div className="bg-prc drop-shadow text-2xl font-bold p-5 text-white rounded-md">
                 Welcome! here's you report tracking!
-                <div className='bg-white pt-5 pb-5 rounded-md drop-shadow-sm font-semibold text-text mb-4'>
+                <div className='bg-white pt-5 pb-5 mt-4 rounded-md drop-shadow-sm font-semibold text-text mb-4'>
                 <div className='px-5 pb-3'>
-                    <div className='text-sm'>Title: {state?.data?.title}</div>
-                    <div className='text-sm'>Category: {state?.data?.category?.desc}</div>
-                    <div className='text-sm'>Status: {state?.data?.status?.desc}</div>
-                    <div className='text-sm'>Dispatched Officer: {state?.data?.user === null ? 'None' : `${state?.data?.user?.first_name} ${state?.data?.user?.last_name}` }</div>
+                    <div className='text-lg'>Title: {state?.data?.title}</div>
+                    <div className='text-lg'>Category: {state?.data?.category?.desc}</div>
+                    <div className='text-lg'>Status: {state?.data?.status?.desc}</div>
+                    <div className='text-lg'>Dispatched Officer: {state?.data?.user === null ? 'None' : `${state?.data?.user?.first_name} ${state?.data?.user?.last_name}` }</div>
                 </div>
 
             </div>

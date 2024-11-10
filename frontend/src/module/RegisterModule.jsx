@@ -7,11 +7,13 @@ import { AppContext } from '../context/AppContext'
 import { NavLink, useNavigate } from 'react-router-dom'
 import AlreadyLoginRedirect from '../component/AlreadyLoginRedirect'
 import bgImage from '../resource/bg.jpg'
+import ResponseMessage from '../component/ResponseMessage'
 
 export default function RegisterModule() {
     const navigate = useNavigate()
     const {setToken, apiClient} = useContext(AppContext) 
     const [loading, setLoading] = useState(false)
+    const [registerMsg, setRegisterMsg] = useState(false)
     const [newDataForm, setNewDataForm] = useState()
     const [rank, setRank] = useState()
     const [station, setStation] = useState()
@@ -48,7 +50,7 @@ export default function RegisterModule() {
         setLoading(true)
         try {
             const response = await apiClient.post(`v1/auth/register`, newDataForm)
-            navigate(0)
+            setRegisterMsg({msg: "You have been registered Successfully!", desc: "Please wait for the admin to verify your registration, please communicate with your admin for your account confimation."})
         } catch  (error) {
             console.error("error: ", error.response.data.errors)
             setApiResponse(error.response.data.errors)
@@ -63,6 +65,7 @@ export default function RegisterModule() {
     <>
         {loading && (<Loading />)}
         <AlreadyLoginRedirect />
+        {registerMsg && <ResponseMessage message={registerMsg.msg} desc={registerMsg.desc} />}
         <div className='relative flex h-screen overflow-hidden'>
             <div
                 className='absolute -inset-4 bg-cover bg-no-repeat blur-md'
