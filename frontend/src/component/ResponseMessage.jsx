@@ -1,10 +1,15 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-export default function ResponseMessage({message, desc}) {
+export default function ResponseMessage({message, desc, isLogin = false}) {
     const nav = useNavigate()
+
     const handleNav = () => {
-        nav(0)
+        if(isLogin){
+            nav('login')
+        } else{
+
+        }
     }
     return (
         
