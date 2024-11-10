@@ -18,7 +18,22 @@ return new class extends Migration
             $table->timestamps();
         });
         DB::table('lib_ranks')->insert([
-            'desc' => 'NA'
+            ['desc' => 'Police General (PGEN)'],
+            ['desc' => 'Police Lieutenant General (PLTGEN)'],
+            ['desc' => 'Police Major General (PMGEN)'],
+            ['desc' => 'Police Brigadier General (PBGEN)'],
+            ['desc' => 'Police Colonel (PCOL)'],
+            ['desc' => 'Police Lieutenant Colonel (PLTCOL)'],
+            ['desc' => 'Police Major (PMAJ)'],
+            ['desc' => 'Police Captain (PCPT)'],
+            ['desc' => 'Police Lieutenant (PLT)'],
+            ['desc' => 'Police Executive Master Sergeant (PEMS)'],
+            ['desc' => 'Police Chief Master Sergeant (PCMS)'],
+            ['desc' => 'Police Senior Master Sergeant (PSMS)'],
+            ['desc' => 'Police Master Sergeant (PMSg)'],
+            ['desc' => 'Police Staff Sergeant (PSSg)'],
+            ['desc' => 'Police Corporal (PCpl)'],
+            ['desc' => 'Patrolman/Patrolwoman (Pat)']
         ]);
     }
 

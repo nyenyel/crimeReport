@@ -220,7 +220,7 @@ export default function PublicModule() {
             {/* <div className='relative flex-1 flex justify-center'> */}
             <div className="flex min-h-screen justify-center items-center">
                 <div className='flex-1 bg-gradient-to-l from-src to-prc rounded-r-lg p-10 text-sec-text flex flex-col justify-center z-10'>
-                    <NavLink to={'login'}>
+                    <NavLink to={'login'} replace={true}>
                         <Logo />
                     </NavLink>
                     <div className='mt-6 text-4xl font-bold '>Crime Report</div>
@@ -347,42 +347,68 @@ export default function PublicModule() {
                                 </div>
                             </div>
                         </div>
-                        <div className='text-xl font-normal mt-5'>Terms and Condition(dummy)</div>
+                        <div className='text-xl font-normal mt-5'>Terms and Condition</div>
                         <div className='flex'>
                             <div className='w-0.5 bg-white mt-2'/>
                             <div>
-                                <div className="text-md font-thin p-2">
-                                    By accessing or using [Your Website/Service Name], you agree to comply with and be bound by these Terms and Conditions. If you disagree with any part of these terms, please do not use our services.
+                                <div className='text-md font-thin p-2'>
+                                    Version 1.0
                                 </div>
-                                <div className="text-md font-thin p-2">
-                                    <strong className='font-bold'>Acceptance of Terms:</strong> By using our website and services, you agree to these Terms and Conditions. These terms may be updated from time to time, and any changes will be posted on this page. Your continued use of our services signifies your acceptance of these changes.
+                                <div className='text-md font-thin p-2'>
+                                    Last Updated: November 08, 2024
                                 </div>
-                                <div className="text-md font-thin p-2">
-                                    <strong className='font-bold'>Privacy Policy:</strong> Your use of our website is also governed by our Privacy Policy, which describes how we collect, use, and protect your information. Please review the Privacy Policy before using our services.
+                                <div className='text-md font-thin p-2'>
+                                    This End-User License Agreement ("EULA") is a legal agreement between you ("User") and the operators of the Enhancing Community Empowerment with a Web-Based Crime Report System ("Website"), governing your use of this Website and its associated services. By accessing, using, or submitting a report on this Website, you agree to comply with and be bound by the terms of this EULA.
                                 </div>
-                                <div className="text-md font-thin p-2">
-                                    <strong className='font-bold'>Use of the Website:</strong> You must be at least [age, e.g., 13] years old to use our website. You agree not to use the website in any way that may damage, disable, or impair the site, interfere with any other user's experience, or be illegal. Any unauthorized use or access to our website may result in legal action.
+                                <div className='text-md font-thin p-2'>
+                                    <strong>Grant of License</strong><br/>
+                                    You are granted a limited, non-exclusive, non-transferable, revocable license to access and use the Website strictly for lawful purposes and in accordance with this EULA.
                                 </div>
-                                <div className="text-md font-thin p-2">
-                                    <strong className='font-bold'>Account Responsibilities:</strong> When you create an account, you are responsible for maintaining the confidentiality of your account and password. You are responsible for all activities that occur under your account. Please notify us immediately of any unauthorized use of your account.
+                                <div className='text-md font-thin p-2'>
+                                    <strong>User Responsibilities and Restrictions</strong><br/>
+                                    • Accurate Information: You agree to provide accurate and truthful information when submitting crime reports or any other data.<br/>
+                                    • Lawful Use: You agree not to use the Website for any unlawful or harmful activities, including submitting false information, spam, harassment, or any malicious content.<br/>
+                                    • Unauthorized Access: You shall not attempt to gain unauthorized access to the Website, its servers, or any associated networks.<br/>
+                                    • No Modification: You agree not to modify, alter, or create derivative works of the Website or its content.
                                 </div>
-                                <div className="text-md font-thin p-2">
-                                    <strong className='font-bold'>Intellectual Property:</strong> All content on this website, including text, images, logos, and software, is the property of [Your Company/Website] or its licensors. You may not copy, distribute, or create derivative works of our content without our express written permission.
+                                <div className='text-md font-thin p-2'>
+                                    <strong>User-Submitted Content</strong><br/>
+                                    By submitting information, reports, or data, you grant the Website a non-exclusive, royalty-free, and worldwide license to use, distribute, and display this content solely to achieve the intended purpose of the Website. The Website reserves the right to review, remove, or modify any content that violates this EULA, the Privacy Policy, or applicable laws.
                                 </div>
-                                <div className="text-md font-thin p-2">
-                                    <strong className='font-bold'>User-Generated Content:</strong> By submitting content to our site (e.g., comments, reviews), you grant us a non-exclusive, royalty-free, perpetual license to use, reproduce, and distribute that content. You are responsible for the content you post and agree not to post any content that is illegal, offensive, or infringes on others’ rights.
+                                <div className='text-md font-thin p-2'>
+                                    <strong>Privacy and Data Collection</strong><br/>
+                                    The Website collects and processes personal data in accordance with its Privacy Policy. By using this Website, you agree to the collection, storage, and use of your information as outlined in the Privacy Policy.
                                 </div>
-                                <div className="text-md font-thin p-2">
-                                    <strong className='font-bold'>Limitations of Liability:</strong> [Your Company/Website] will not be liable for any direct, indirect, or incidental damages arising from your use of our website or inability to use the website. We do not guarantee the accuracy, completeness, or usefulness of any information on our website.
+                                <div className='text-md font-thin p-2'>
+                                    <strong>Disclaimers of Warranty</strong><br/>
+                                    The Website is provided on an "as-is" and "as-available" basis. The operators make no warranties, express or implied, regarding the accuracy, completeness, or reliability of the information on the Website. The Website does not guarantee that its services will be uninterrupted or error-free.
                                 </div>
-                                <div className="text-md font-thin p-2">
-                                    <strong className='font-bold'>Termination of Access:</strong> We reserve the right to terminate your access to our website without prior notice if you violate any terms of this agreement. Upon termination, your right to use the website will cease immediately, and any provisions that by their nature should survive termination will continue to be enforceable.
+                                <div className='text-md font-thin p-2'>
+                                    <strong>Limitation of Liability</strong><br/>
+                                    To the fullest extent permitted by law, the operators of the Website shall not be liable for any damages, including but not limited to direct, indirect, incidental, punitive, or consequential damages arising from your use of, or inability to use, the Website. The operators shall not be responsible for any inaccuracies in the data submitted by users or displayed on the Website.
                                 </div>
-                                <div className="text-md font-thin p-2">
-                                    <strong className='font-bold'>Governing Law:</strong> These Terms and Conditions are governed by and construed in accordance with the laws of [Your Country/State], and you submit to the exclusive jurisdiction of its courts for any disputes.
+                                <div className='text-md font-thin p-2'>
+                                    <strong>Account Security</strong><br/>
+                                    You are responsible for maintaining the confidentiality of your login credentials and are solely responsible for any activity that occurs under your account. You agree to notify the Website administrators immediately of any unauthorized use of your account.
                                 </div>
-                                <div className="text-md font-thin p-2">
-                                    <strong className='font-bold'>Contact Information:</strong> For questions about these Terms and Conditions, please contact us at [Your Contact Information, e.g., email address, phone number].
+                                <div className='text-md font-thin p-2'>
+                                    <strong>Modifications to the EULA</strong><br/>
+                                    The Website reserves the right to update or modify this EULA at any time. Changes will be posted on the Website, and your continued use of the Website constitutes acceptance of any modifications.
+                                </div>
+                                <div className='text-md font-thin p-2'>
+                                    <strong>Termination</strong><br/>
+                                    The Website may suspend or terminate your account and access to the Website at its discretion if you violate any terms of this EULA.
+                                </div>
+                                <div className='text-md font-thin p-2'>
+                                    <strong>Governing Law</strong><br/>
+                                    This EULA shall be governed by the laws of the Philippines, without regard to its conflict of laws principles.
+                                </div>
+                                <div className='text-md font-thin p-2'>
+                                    <strong>Contact Information</strong><br/>
+                                    If you have questions or concerns about this EULA, please contact us at karlgarcianapiza@gmail.com.
+                                </div>
+                                <div className='text-md font-thin p-2'>
+                                    By using this Website, you acknowledge that you have read, understood, and agree to be bound by the terms of this EULA.
                                 </div>
                             </div>
 

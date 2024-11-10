@@ -1,17 +1,17 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Logo from '../component/Logo'
 import Loading from '../component/Loading'
 import axios from 'axios'
 import { auth, crud } from '../resource/api'
 import { AppContext } from '../context/AppContext'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { Navigate, NavLink, useNavigate } from 'react-router-dom'
 import AlreadyLoginRedirect from '../component/AlreadyLoginRedirect'
 import bgImage from '../resource/bg.jpg'
 import L from 'leaflet';
 
 export default function LoginModule() {
     const navigate = useNavigate()
-    const {setToken} = useContext(AppContext) 
+    const {setToken, token,role} = useContext(AppContext) 
     const [loading, setLoading] = useState(false)
     const [message, setMessage] = useState()
     const [loginForm, setLoginForm] = useState({
@@ -63,10 +63,11 @@ export default function LoginModule() {
         }
         login()
     }
+
     return (
     <>
         {loading && (<Loading />)}
-        <AlreadyLoginRedirect />
+        {/* <AlreadyLoginRedirect/> */}
         <div className='relative flex h-screen overflow-hidden'>
             <div
                 className='absolute -inset-4 bg-cover bg-no-repeat blur-md'

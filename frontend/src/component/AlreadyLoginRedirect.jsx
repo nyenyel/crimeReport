@@ -4,6 +4,7 @@ import { Navigate } from 'react-router-dom'
 
 export default function AlreadyLoginRedirect() {
     const {token, role} = useContext(AppContext)
+    console.log(token)
     if (role === 'Admin') {
         return (
             <>
