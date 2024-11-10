@@ -7,10 +7,12 @@ import Loading from './Loading'
 export default function SideBar() {
     const {apiClient, role, setToken} =useContext(AppContext)
     const [loading, setLoading ] = useState(false)
+    const [modal, setModal] = useState(false)
+    const handleModal = () => setModal(!modal)
     const nav = useNavigate()
     const logout = async (e) => {
         setLoading(true)
-
+        handleModal()
         try {
             const response = await apiClient.post('v1/auth/logout', {})
             if(response.status === 200){
@@ -31,7 +33,22 @@ export default function SideBar() {
         return (
             <>
             {loading && <Loading />}
-                <div className='bg-prc text-sec-text rounded-r-2xl h-screen min-w-72'>
+            {modal && 
+                <div className="absolute z-50 bg-black w-full h-full bg-opacity-60 flex items-center justify-center">
+                    <div className="bg-prc drop-shadow text-md font-bold p-5 text-white rounded-md">
+                        Logging Out
+                        <div className="mt-2 text-sm font-normal">
+                            Are you sure you want to logut now?
+                        </div>
+                        <div className='flex'>
+                            <div className='flex-1'></div>
+                            <div className="flex-none mt-2 text-sm font-normal hover:underline cursor-pointer p-2" onClick={handleModal}>Cancel</div>
+                            <div className="flex-none mt-2 text-sm font-normal rounded-md hover:bg-gray-100 hover:text-prc cursor-pointer p-2" onClick={logout}>Logout</div>
+                        </div>
+                    </div>
+                </div>
+            }
+                <div className='bg-prc text-sec-text rounded-r-2xl min-w-72 sticky top-0 h-screen overflow-y-auto'>
                     <div className='mx-6 py-6'>
                         <Logo/>
                     </div>
@@ -148,7 +165,7 @@ export default function SideBar() {
                             </div>
                             <div className=' mt-0.5 font-semibold text-lg'>Profile</div>
                         </NavLink>
-                        <div onClick={logout} className='flex cursor-pointer content-center px-6 '>
+                        <div onClick={handleModal} className='flex cursor-pointer content-center px-6 '>
                             <div className='content-center font-extrabold'>
                                 <span className="icon-[iconamoon--arrow-right-2-duotone] h-8 w-8"></span>
                             </div>
@@ -166,6 +183,21 @@ export default function SideBar() {
         return (
             <>
             {loading && <Loading />}
+            {modal && 
+                <div className="absolute z-50 bg-black w-full h-full bg-opacity-60 flex items-center justify-center">
+                    <div className="bg-prc drop-shadow text-md font-bold p-5 text-white rounded-md">
+                        Logging Out
+                        <div className="mt-2 text-sm font-normal">
+                            Are you sure you want to logut now?
+                        </div>
+                        <div className='flex'>
+                            <div className='flex-1'></div>
+                            <div className="flex-none mt-2 text-sm font-normal hover:underline cursor-pointer p-2" onClick={handleModal}>Cancel</div>
+                            <div className="flex-none mt-2 text-sm font-normal rounded-md hover:bg-gray-100 hover:text-prc cursor-pointer p-2" onClick={logout}>Logout</div>
+                        </div>
+                    </div>
+                </div>
+            }
                 <div className='bg-prc text-sec-text rounded-r-2xl h-screen min-w-72'>
                     <div className='mx-6 py-6'>
                         <Logo/>

@@ -74,8 +74,8 @@ export default function TrackerModule() {
                     <div className='mt-2 text-sm font-normal'>Password</div>
                     <input onKeyDown={handleSubmit} onChange={handleChange} name='password' type='password' className='rounded-md p-2 font-normal text-prc w-full' placeholder='Please Enter your password'/>
                     {state.error !==null  &&<label className='text-sm font-normal text-red-600'>{state?.error}</label>}
+                </div>
             </div>
-        </div>
         ):(
         <div className="absolute z-50 bg-black w-full h-full bg-opacity-60 flex items-center justify-center">
             <div
