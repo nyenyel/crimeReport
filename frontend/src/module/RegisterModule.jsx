@@ -65,7 +65,7 @@ export default function RegisterModule() {
     <>
         {loading && (<Loading />)}
         <AlreadyLoginRedirect />
-        {registerMsg && <ResponseMessage message={registerMsg.msg} desc={registerMsg.desc} />}
+        {registerMsg && <ResponseMessage message={registerMsg.msg} desc={registerMsg.desc} isLogin={true}/>}
         <div className='relative flex h-screen overflow-hidden'>
             <div
                 className='absolute -inset-4 bg-cover bg-no-repeat blur-md'

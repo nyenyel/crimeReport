@@ -16,9 +16,9 @@ export default function AdminModule() {
         <>
         <LoginRedirect />
         <div className='flex'>
-            <div className='sticky top-0 h-full overflow-y-auto'>
-                <SideBar />
-            </div>
+            
+            <SideBar />
+
             <div className='flex-1 ml-4 py-4 pr-6'>
                 <Outlet />
             </div>
