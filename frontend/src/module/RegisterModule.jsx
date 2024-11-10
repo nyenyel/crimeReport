@@ -157,7 +157,8 @@ export default function RegisterModule() {
                                 </div>
                                 <div className='flex-none flex flex-col'>
                                     <label className='text-sm font-regular'>Rank</label>
-                                    <select name='lib_rank_id' value={newDataForm?.lib_rank_id} onChange={handleChange}  className="bg-gray-400 font-medium bg-opacity-5 block py-2 px-4  w-full text-sm text-white  border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                                    <select name='lib_rank_id' value={newDataForm?.lib_rank_id} onChange={handleChange}  className="bg-gray-400 font-medium bg-opacity-5 block py-2 px-4  w-full text-sm text-gray-400   border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                                        <option value={0} key={`rank-0`}>Select a Rank</option>    
                                         {rank?.map((item, index) => (
                                             <option value={item?.id} key={`rank-${index}`}>{item?.desc}</option>    
                                         ))}
@@ -165,7 +166,7 @@ export default function RegisterModule() {
                                 </div>
                                 <div className='flex-none flex flex-col'>
                                     <label className='text-sm font-regular'>Role</label>
-                                    <select name='lib_role_id' value={newDataForm?.lib_role_id} onChange={handleChange} className="bg-gray-400 font-medium bg-opacity-5 block py-2 px-4  w-full text-sm text-white  border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                                    <select name='lib_role_id' value={newDataForm?.lib_role_id} onChange={handleChange} className="bg-gray-400 font-medium bg-opacity-5 block py-2 px-4  w-full text-sm text-gray-400   border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer">
                                         <option value={1} >Admin</option>    
                                         <option value={2} >PNP</option>    
                                     </select>
@@ -173,7 +174,9 @@ export default function RegisterModule() {
                             </div>
                             <div className='flex-1 flex flex-col mt-2'>
                                 <label className='text-sm font-regular'>Station</label>
-                                <select name='lib_station_id' value={newDataForm?.lib_station_id} onChange={handleChange}  className="bg-gray-400 font-medium bg-opacity-5 block py-2 px-4  w-full text-sm text-white  border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                                <select name='lib_station_id' value={newDataForm?.lib_station_id} onChange={handleChange}  className="bg-gray-400 font-medium bg-opacity-5 block py-2 px-4  w-full text-sm text-gray-400  border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                                     <option value={0} key={`rank-0`} style={{ color: 'black' }}>Select a Station</option>    
+                                    
                                     {station?.map((item, index) => (
                                         <option value={item?.id} key={`station-${index}`}> {item?.address} </option>
                                     ))}
