@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-    import React, { useContext, useState } from 'react'
-=======
 import React, { useContext, useEffect, useState } from 'react'
->>>>>>> 24be7eb788aab35a61c1fd1ba508a3192391ed53
 import Logo from '../component/Logo'
 import Loading from '../component/Loading'
 import axios from 'axios'
