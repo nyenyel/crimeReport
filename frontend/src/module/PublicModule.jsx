@@ -21,7 +21,36 @@ export default function PublicModule() {
     const [types, setTypes] = useState([]);
     const [modal, setModal] = useState(false)
     const [reportTracker, setReportTracker] = useState({})
+    
     const handleModal = () => setModal(!modal)  
+    const [privacyAndTerms, setPrivacyAndTerms] = useState(false)
+    const [privacyAndTermsModal, setPrivacyAndTermsModal] = useState(false)
+    // Function to toggle modal
+    const handlePrivacyAndTermsModal = () => {
+        setPrivacyAndTermsModal(!privacyAndTermsModal);
+    };
+
+    // Function to handle checkbox change
+    const handlePrivacyAndTerms = () => {
+        if (!privacyAndTerms) {
+            // Show modal only when checkbox is unchecked
+            handlePrivacyAndTermsModal();
+        } else {
+            // Unchecking directly without modal
+            setPrivacyAndTerms(false);
+        }
+    };
+
+    // Function to handle modal actions
+    const handleModalAction = (accept) => {
+        if (accept) {
+            setPrivacyAndTerms(true); // Set checkbox as checked if user accepts
+        } else {
+            setPrivacyAndTerms(false); // Keep checkbox unchecked if user cancels
+        }
+        handlePrivacyAndTermsModal(); // Close the modal in both cases
+    };
+    
     
     const handleCategoryChange = (e) => {
         const {name, value} = e.target
@@ -176,6 +205,7 @@ export default function PublicModule() {
             </div>
         </>
         }
+
         <div className='relative flex h-screen overflow-hidden'>
             <div
                 className='absolute -inset-4 bg-cover bg-no-repeat blur-md'
@@ -278,10 +308,12 @@ export default function PublicModule() {
                                 required
                                 type="checkbox" 
                                 id="privacyAgreement" 
+                                checked={privacyAndTerms}
+                                onChange={() => handlePrivacyAndTerms(true)}
                                 className="flex-none content-center"
                             />
                             <label htmlFor="privacyAgreement" className="flex items-center ml-2">
-                                I agree to the <a href="/privacy-policy" className="text-blue-600 px-1 underline">Privacy Policy</a> and <a href="/terms-conditions" className="text-blue-600 px-1 underline">Terms and Conditions</a>.
+                                I agree to the <div className="cursor-pointer text-blue-600 px-1 underline" >Privacy Policy</div> and <div  className="cursor-pointer text-blue-600 px-1 underline" >Terms and Conditions</div>.
                             </label>
                         </div>
 
@@ -290,7 +322,74 @@ export default function PublicModule() {
                 </div>
             </div>
             <div className='flex-1'></div>
+            {privacyAndTermsModal &&
+            <>
+                <div className="absolute z-50 bg-black w-full h-full bg-opacity-60 flex items-center justify-center">
+                    <div className="bg-prc drop-shadow text-md font-bold p-5 text-white rounded-md max-h-96 max-w-[900px] overflow-y-auto">
+                        <div className='text-xl font-normal'>Privacy Policy</div>
+                        <div className='flex'>
+                            <div className='w-0.5 bg-white mt-2'/>
+                            <div>
+                                <div className='text-md font-thin p-2'>
+                                    By signing below, you consent to Philippine National Police collecting, using, and storing your personal data for the purposes of Crime Report in accordance with the Data Privacy Act of 2012 (Republic Act No. 10173) and all other applicable data protection laws.
+                                </div>
+                                <div className='text-md font-thin p-2'>
+                                We are committed to protecting your personal data in accordance with the requirements of the Data Privacy Act of 2012 and will retain it only for as long as necessary to fulfill the purposes stated above or as required by law.
+                                </div>
+                                <div className='text-md font-thin p-2'>
+                                By checking this form, you confirm that you understand and agree to the collection and use of your personal data as outlined above.
+                                </div>
+                            </div>
+                        </div>
+                        <div className='text-xl font-normal mt-5'>Terms and Condition(dummy)</div>
+                        <div className='flex'>
+                            <div className='w-0.5 bg-white mt-2'/>
+                            <div>
+                                <div className="text-md font-thin p-2">
+                                    By accessing or using [Your Website/Service Name], you agree to comply with and be bound by these Terms and Conditions. If you disagree with any part of these terms, please do not use our services.
+                                </div>
+                                <div className="text-md font-thin p-2">
+                                    <strong className='font-bold'>Acceptance of Terms:</strong> By using our website and services, you agree to these Terms and Conditions. These terms may be updated from time to time, and any changes will be posted on this page. Your continued use of our services signifies your acceptance of these changes.
+                                </div>
+                                <div className="text-md font-thin p-2">
+                                    <strong className='font-bold'>Privacy Policy:</strong> Your use of our website is also governed by our Privacy Policy, which describes how we collect, use, and protect your information. Please review the Privacy Policy before using our services.
+                                </div>
+                                <div className="text-md font-thin p-2">
+                                    <strong className='font-bold'>Use of the Website:</strong> You must be at least [age, e.g., 13] years old to use our website. You agree not to use the website in any way that may damage, disable, or impair the site, interfere with any other user's experience, or be illegal. Any unauthorized use or access to our website may result in legal action.
+                                </div>
+                                <div className="text-md font-thin p-2">
+                                    <strong className='font-bold'>Account Responsibilities:</strong> When you create an account, you are responsible for maintaining the confidentiality of your account and password. You are responsible for all activities that occur under your account. Please notify us immediately of any unauthorized use of your account.
+                                </div>
+                                <div className="text-md font-thin p-2">
+                                    <strong className='font-bold'>Intellectual Property:</strong> All content on this website, including text, images, logos, and software, is the property of [Your Company/Website] or its licensors. You may not copy, distribute, or create derivative works of our content without our express written permission.
+                                </div>
+                                <div className="text-md font-thin p-2">
+                                    <strong className='font-bold'>User-Generated Content:</strong> By submitting content to our site (e.g., comments, reviews), you grant us a non-exclusive, royalty-free, perpetual license to use, reproduce, and distribute that content. You are responsible for the content you post and agree not to post any content that is illegal, offensive, or infringes on others’ rights.
+                                </div>
+                                <div className="text-md font-thin p-2">
+                                    <strong className='font-bold'>Limitations of Liability:</strong> [Your Company/Website] will not be liable for any direct, indirect, or incidental damages arising from your use of our website or inability to use the website. We do not guarantee the accuracy, completeness, or usefulness of any information on our website.
+                                </div>
+                                <div className="text-md font-thin p-2">
+                                    <strong className='font-bold'>Termination of Access:</strong> We reserve the right to terminate your access to our website without prior notice if you violate any terms of this agreement. Upon termination, your right to use the website will cease immediately, and any provisions that by their nature should survive termination will continue to be enforceable.
+                                </div>
+                                <div className="text-md font-thin p-2">
+                                    <strong className='font-bold'>Governing Law:</strong> These Terms and Conditions are governed by and construed in accordance with the laws of [Your Country/State], and you submit to the exclusive jurisdiction of its courts for any disputes.
+                                </div>
+                                <div className="text-md font-thin p-2">
+                                    <strong className='font-bold'>Contact Information:</strong> For questions about these Terms and Conditions, please contact us at [Your Contact Information, e.g., email address, phone number].
+                                </div>
+                            </div>
 
+                        </div>
+                        <div className='flex select-none gap-4 mt-4'>
+                            <div className='flex-1 p-2'/>
+                            <div className='flex-none p-2 font-normal hover:underline cursor-pointer' onClick={() => handleModalAction(false)}>Cancel</div>
+                            <div className=' flex-none p-2 bg-white rounded-md px-4 cursor-pointer text-prc hover:bg-gray-300' onClick={()=>handleModalAction(true)}>Accept</div>
+                        </div>
+                    </div>
+                </div>
+                </>
+            }
         </div>
         </>
     )
