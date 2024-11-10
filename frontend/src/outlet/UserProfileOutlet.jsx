@@ -3,11 +3,14 @@ import LoginRedirect from '../component/LoginRedirect'
 import { useNavigate, useParams } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
 import Loading from '../component/Loading'
+import ResponseMessage from '../component/ResponseMessage'
 
 export default function UserProfileOutlet() {
     const {id} = useParams()
     const {apiClient} =useContext(AppContext)
     const [loading ,setLoading] = useState(false)
+    const [registerMsg, setRegisterMsg] = useState(false)
+
     const navigate = useNavigate()
     const [data, setData] = useState()
     const [rank, setRank] = useState()
@@ -35,7 +38,8 @@ export default function UserProfileOutlet() {
         setLoading(true)
         try {
             const response = await apiClient.put(`v1/crud/user/${id}`, newDataForm)
-            navigate(0)
+            setRegisterMsg({msg: "You updated the profile successfully!", desc: "The changes have been made, please tell the owner of the account."})
+
         } catch  (error) {
             console.error("error: ", error.response.data.errors)
             setApiResponse(error.response.data.errors)
@@ -88,6 +92,8 @@ export default function UserProfileOutlet() {
     <>
     <LoginRedirect/>
     {loading && <Loading />}
+    {registerMsg && <ResponseMessage message={registerMsg.msg} desc={registerMsg.desc} />}
+
     <div className=''>
         <div className='flex pr-6 pt-4 text-prc font-light text-3xl mb-2'>
             <div className='flex-1'/>

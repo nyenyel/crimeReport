@@ -21,7 +21,36 @@ export default function PublicModule() {
     const [types, setTypes] = useState([]);
     const [modal, setModal] = useState(false)
     const [reportTracker, setReportTracker] = useState({})
+    
     const handleModal = () => setModal(!modal)  
+    const [privacyAndTerms, setPrivacyAndTerms] = useState(false)
+    const [privacyAndTermsModal, setPrivacyAndTermsModal] = useState(false)
+    // Function to toggle modal
+    const handlePrivacyAndTermsModal = () => {
+        setPrivacyAndTermsModal(!privacyAndTermsModal);
+    };
+
+    // Function to handle checkbox change
+    const handlePrivacyAndTerms = () => {
+        if (!privacyAndTerms) {
+            // Show modal only when checkbox is unchecked
+            handlePrivacyAndTermsModal();
+        } else {
+            // Unchecking directly without modal
+            setPrivacyAndTerms(false);
+        }
+    };
+
+    // Function to handle modal actions
+    const handleModalAction = (accept) => {
+        if (accept) {
+            setPrivacyAndTerms(true); // Set checkbox as checked if user accepts
+        } else {
+            setPrivacyAndTerms(false); // Keep checkbox unchecked if user cancels
+        }
+        handlePrivacyAndTermsModal(); // Close the modal in both cases
+    };
+    
     
     const handleCategoryChange = (e) => {
         const {name, value} = e.target
@@ -166,7 +195,12 @@ export default function PublicModule() {
         <>
             <div className="absolute z-50 bg-black w-full h-full bg-opacity-60 flex items-center justify-center">
                 <div className="bg-prc drop-shadow text-md font-bold p-5 text-white rounded-md">
-                    The report has been successfully submitted!
+                    <div className='flex'>
+                        <div className='flex-1'>   
+                            The report has been successfully submitted!
+                        </div>
+                        <div className='cursor-pointer font-thin -mt-1 hover:scale-105' onClick={handleModal}>x</div>
+                    </div>
                     <div className='mt-2 text-sm font-normal'>To track your report save this link and password before reloading or exiting</div>
                     <div className='mt-2 text-sm font-normal'>Link</div>
                     <div className='text-sm font-normal bg-white text-prc p-4 rounded-md'>{`http://localhost:5173/${reportTracker.code}`}</div>
@@ -176,15 +210,17 @@ export default function PublicModule() {
             </div>
         </>
         }
+
         <div className='relative flex h-screen overflow-hidden'>
             <div
                 className='absolute -inset-4 bg-cover bg-no-repeat blur-md'
                 style={{ backgroundImage: `url(${bgImage})` }}
             ></div>
-
-            <div className='relative flex-1 flex justify-end'>
+            <div className='flex-1'></div>
+            {/* <div className='relative flex-1 flex justify-center'> */}
+            <div className="flex min-h-screen justify-center items-center">
                 <div className='flex-1 bg-gradient-to-l from-src to-prc rounded-r-lg p-10 text-sec-text flex flex-col justify-center z-10'>
-                    <NavLink to={'login'}>
+                    <NavLink to={'login'} replace={true}>
                         <Logo />
                     </NavLink>
                     <div className='mt-6 text-4xl font-bold '>Crime Report</div>
@@ -278,10 +314,12 @@ export default function PublicModule() {
                                 required
                                 type="checkbox" 
                                 id="privacyAgreement" 
+                                checked={privacyAndTerms}
+                                onChange={() => handlePrivacyAndTerms(true)}
                                 className="flex-none content-center"
                             />
                             <label htmlFor="privacyAgreement" className="flex items-center ml-2">
-                                I agree to the <a href="/privacy-policy" className="text-blue-600 px-1 underline">Privacy Policy</a> and <a href="/terms-conditions" className="text-blue-600 px-1 underline">Terms and Conditions</a>.
+                                I agree to the <div className="cursor-pointer text-blue-600 px-1 underline" >Privacy Policy</div> and <div  className="cursor-pointer text-blue-600 px-1 underline" >Terms and Conditions</div>.
                             </label>
                         </div>
 
@@ -290,7 +328,100 @@ export default function PublicModule() {
                 </div>
             </div>
             <div className='flex-1'></div>
+            {privacyAndTermsModal &&
+            <>
+                <div className="absolute z-50 bg-black w-full h-full bg-opacity-60 flex items-center justify-center">
+                    <div className="bg-prc drop-shadow text-md font-bold p-5 text-white rounded-md max-h-96 max-w-[900px] overflow-y-auto">
+                        <div className='text-xl font-normal'>Privacy Policy</div>
+                        <div className='flex'>
+                            <div className='w-0.5 bg-white mt-2'/>
+                            <div>
+                                <div className='text-md font-thin p-2'>
+                                    By signing below, you consent to Philippine National Police collecting, using, and storing your personal data for the purposes of Crime Report in accordance with the Data Privacy Act of 2012 (Republic Act No. 10173) and all other applicable data protection laws.
+                                </div>
+                                <div className='text-md font-thin p-2'>
+                                We are committed to protecting your personal data in accordance with the requirements of the Data Privacy Act of 2012 and will retain it only for as long as necessary to fulfill the purposes stated above or as required by law.
+                                </div>
+                                <div className='text-md font-thin p-2'>
+                                By checking this form, you confirm that you understand and agree to the collection and use of your personal data as outlined above.
+                                </div>
+                            </div>
+                        </div>
+                        <div className='text-xl font-normal mt-5'>Terms and Condition</div>
+                        <div className='flex'>
+                            <div className='w-0.5 bg-white mt-2'/>
+                            <div>
+                                <div className='text-md font-thin p-2'>
+                                    Version 1.0
+                                </div>
+                                <div className='text-md font-thin p-2'>
+                                    Last Updated: November 08, 2024
+                                </div>
+                                <div className='text-md font-thin p-2'>
+                                    This End-User License Agreement ("EULA") is a legal agreement between you ("User") and the operators of the Enhancing Community Empowerment with a Web-Based Crime Report System ("Website"), governing your use of this Website and its associated services. By accessing, using, or submitting a report on this Website, you agree to comply with and be bound by the terms of this EULA.
+                                </div>
+                                <div className='text-md font-thin p-2'>
+                                    <strong>Grant of License</strong><br/>
+                                    You are granted a limited, non-exclusive, non-transferable, revocable license to access and use the Website strictly for lawful purposes and in accordance with this EULA.
+                                </div>
+                                <div className='text-md font-thin p-2'>
+                                    <strong>User Responsibilities and Restrictions</strong><br/>
+                                    • Accurate Information: You agree to provide accurate and truthful information when submitting crime reports or any other data.<br/>
+                                    • Lawful Use: You agree not to use the Website for any unlawful or harmful activities, including submitting false information, spam, harassment, or any malicious content.<br/>
+                                    • Unauthorized Access: You shall not attempt to gain unauthorized access to the Website, its servers, or any associated networks.<br/>
+                                    • No Modification: You agree not to modify, alter, or create derivative works of the Website or its content.
+                                </div>
+                                <div className='text-md font-thin p-2'>
+                                    <strong>User-Submitted Content</strong><br/>
+                                    By submitting information, reports, or data, you grant the Website a non-exclusive, royalty-free, and worldwide license to use, distribute, and display this content solely to achieve the intended purpose of the Website. The Website reserves the right to review, remove, or modify any content that violates this EULA, the Privacy Policy, or applicable laws.
+                                </div>
+                                <div className='text-md font-thin p-2'>
+                                    <strong>Privacy and Data Collection</strong><br/>
+                                    The Website collects and processes personal data in accordance with its Privacy Policy. By using this Website, you agree to the collection, storage, and use of your information as outlined in the Privacy Policy.
+                                </div>
+                                <div className='text-md font-thin p-2'>
+                                    <strong>Disclaimers of Warranty</strong><br/>
+                                    The Website is provided on an "as-is" and "as-available" basis. The operators make no warranties, express or implied, regarding the accuracy, completeness, or reliability of the information on the Website. The Website does not guarantee that its services will be uninterrupted or error-free.
+                                </div>
+                                <div className='text-md font-thin p-2'>
+                                    <strong>Limitation of Liability</strong><br/>
+                                    To the fullest extent permitted by law, the operators of the Website shall not be liable for any damages, including but not limited to direct, indirect, incidental, punitive, or consequential damages arising from your use of, or inability to use, the Website. The operators shall not be responsible for any inaccuracies in the data submitted by users or displayed on the Website.
+                                </div>
+                                <div className='text-md font-thin p-2'>
+                                    <strong>Account Security</strong><br/>
+                                    You are responsible for maintaining the confidentiality of your login credentials and are solely responsible for any activity that occurs under your account. You agree to notify the Website administrators immediately of any unauthorized use of your account.
+                                </div>
+                                <div className='text-md font-thin p-2'>
+                                    <strong>Modifications to the EULA</strong><br/>
+                                    The Website reserves the right to update or modify this EULA at any time. Changes will be posted on the Website, and your continued use of the Website constitutes acceptance of any modifications.
+                                </div>
+                                <div className='text-md font-thin p-2'>
+                                    <strong>Termination</strong><br/>
+                                    The Website may suspend or terminate your account and access to the Website at its discretion if you violate any terms of this EULA.
+                                </div>
+                                <div className='text-md font-thin p-2'>
+                                    <strong>Governing Law</strong><br/>
+                                    This EULA shall be governed by the laws of the Philippines, without regard to its conflict of laws principles.
+                                </div>
+                                <div className='text-md font-thin p-2'>
+                                    <strong>Contact Information</strong><br/>
+                                    If you have questions or concerns about this EULA, please contact us at karlgarcianapiza@gmail.com.
+                                </div>
+                                <div className='text-md font-thin p-2'>
+                                    By using this Website, you acknowledge that you have read, understood, and agree to be bound by the terms of this EULA.
+                                </div>
+                            </div>
 
+                        </div>
+                        <div className='flex select-none gap-4 mt-4'>
+                            <div className='flex-1 p-2'/>
+                            <div className='flex-none p-2 font-normal hover:underline cursor-pointer' onClick={() => handleModalAction(false)}>Cancel</div>
+                            <div className=' flex-none p-2 bg-white rounded-md px-4 cursor-pointer text-prc hover:bg-gray-300' onClick={()=>handleModalAction(true)}>Accept</div>
+                        </div>
+                    </div>
+                </div>
+                </>
+            }
         </div>
         </>
     )

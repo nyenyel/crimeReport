@@ -5,24 +5,27 @@ import { AppContext } from '../context/AppContext'
 import Loading from './Loading'
 
 export default function SideBar() {
-    const {apiClient, role} =useContext(AppContext)
+    const {apiClient, role, setToken} =useContext(AppContext)
     const [loading, setLoading ] = useState(false)
     const nav = useNavigate()
-    const logout = (e) => {
-        const logoutAcc =  async () => {
-            setLoading(true)
-            try {
-                const response = await apiClient.post('v1/auth/logout', {})
+    const logout = async (e) => {
+        setLoading(true)
+
+        try {
+            const response = await apiClient.post('v1/auth/logout', {})
+            if(response.status === 200){
                 localStorage.removeItem('token')
                 localStorage.removeItem('role')
-            } catch (error) {
-                console.error("Error: ", error)
-            } finally {
-                setLoading(false)
-                nav(0)
-            } 
+                setToken(null)
+                nav('/')
+                console.log('token')
+            }
+        } catch (error) {
+            console.error("Error: ", error)
+        } finally {
+            setLoading(false)
+
         } 
-        logoutAcc()
     }
     if(role === 'Admin'){
         return (
