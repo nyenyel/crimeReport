@@ -39,8 +39,8 @@ export default function AppProvider({children}) {
                 }
             })
             setUser(response.data)
-            setRole(response.data.data.role.desc)
-            localStorage.setItem('role', response.data.data.role.desc)
+            setRole(response?.data?.data?.role?.desc ?? 'community')
+            localStorage.setItem('role', response?.data?.data?.role?.desc ?? 'community')
         } catch (e){
             console.log("error", e)
             if(token) {

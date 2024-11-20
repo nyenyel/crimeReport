@@ -53,7 +53,7 @@ export default function LoginModule() {
                     setToken(response.data.token);
                     localStorage.setItem('token', response.data.token);
                 }
-                navigate(`/${response.data.user.role.desc}`)
+                navigate(`/${response?.data?.user?.role?.desc ?? 'community'}`)
             } catch (e){
                 console.log("Error: ", e)
                 setMessage(e.response.data.message)
@@ -67,7 +67,7 @@ export default function LoginModule() {
     return (
     <>
         {loading && (<Loading />)}
-        {/* <AlreadyLoginRedirect/> */}
+        <AlreadyLoginRedirect/>
         <div className='relative flex h-screen overflow-hidden'>
             <div
                 className='absolute -inset-4 bg-cover bg-no-repeat blur-md'
@@ -102,8 +102,11 @@ export default function LoginModule() {
                         />
                         </div>
                         <div className='flex mt-4'>
-                        <div className='opacity-80 text-sm mr-1'>Does not have an Account?</div>
-                        <NavLink to={'/register'} className='opacity-80 text-sm underline'>Register Now</NavLink>
+                            <div className='opacity-80 text-sm mr-1'>Does not have a</div>
+                            <NavLink to={'/register'} className='opacity-80 text-sm underline mr-1'>PNP</NavLink>
+                            <div className='opacity-80 text-sm mr-1'>or</div>
+                            <NavLink to={'/register-as-community'} className='opacity-80 text-sm underline mr-1'>Community</NavLink>
+                            <div className='opacity-80 text-sm mr-1'> Account?</div>
                         </div>
                         <button type='submit' className='w-full bg-src py-2 rounded-md mt-4'>Login</button>
                     </form>

@@ -26,7 +26,8 @@ class Report extends Model
         'address',
         'id_verification',
         'code',
-        'password'
+        'password',
+        'reporter_account',
     ];
 
     public function status() : BelongsTo {

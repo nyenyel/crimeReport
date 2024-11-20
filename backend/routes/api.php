@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('v1')->group(function () {
     Route::prefix('auth')->group(function(){
         Route::post('register', [AuthController::class, 'register']);
+        Route::post('register-as-community', [AuthController::class, 'registerAsCommunity']);
         Route::post('login', [AuthController::class, 'login']);
         Route::post('logout', [AuthController::class, 'logout'])->middleware(['auth:sanctum']);
         Route::middleware(['auth:sanctum'])->group(function (){
@@ -30,6 +31,9 @@ Route::prefix('v1')->group(function () {
                     'dispatch.location',
                     'dispatch.status',
                     'dispatch.category',
+                    'reports.category',
+                    'reports.location',
+                    'reports.status',
                 ]);
                 return UserResource::make($user);
             });
@@ -57,6 +61,8 @@ Route::prefix('v1')->group(function () {
             Route::get('pnp-resolved/{user}', [ReportController::class, 'pnpResolved']);
             Route::get('pnp-unresolved/{user}', [ReportController::class, 'pnpUnresolved']);
             Route::get('dashboard', [ReportController::class, 'dashboard']);
+            Route::put('community-user/{user}', [UserController::class, 'communityUser']);
+
         });
     });
 });

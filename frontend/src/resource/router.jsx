@@ -12,6 +12,7 @@ import UserOutlet from '../outlet/UserOutlet'
 import StationOutlet from '../outlet/StationOutlet'
 import ProfileOutlet from '../outlet/ProfileOutlet'
 import ReportOutlet from '../outlet/ReportOutlet'
+import { ReportOutlet as CommunityReportOutlet} from '../outlet/Community/ReportOutlet'
 import UserProfileOutlet from '../outlet/UserProfileOutlet'
 import UserVerifyOutlet from '../outlet/UserVerifyOutlet'
 import NewStationOutlet from '../outlet/NewStationOutlet'
@@ -24,6 +25,10 @@ import PNPDispatchedOutlet from '../outlet/PNP/PNPDispatchedOutlet'
 import PNPResolvedOutlet from '../outlet/PNP/PNPResolvedOutlet'
 import CrimeProvider from '../context/CrimeContext'
 import TrackerModule from '../module/TrackerModule'
+import RegisterAsCommunityModule from '../module/RegisterAsCommunityModule'
+import CommunityModule from '../module/CommunityModule'
+import MyReportOutlet from '../outlet/Community/MyReportOutlet'
+import { QuickResponseOutlet } from '../outlet/Community/QuickResponseOutlet'
 
 
 export const router = createBrowserRouter([
@@ -50,6 +55,11 @@ export const router = createBrowserRouter([
     {
       path: 'register',
       element: <RegisterModule />,
+      errorElement: <ErrorComponent />
+    },
+    {
+      path: 'register-as-community',
+      element: <RegisterAsCommunityModule />,
       errorElement: <ErrorComponent />
     },
     {
@@ -156,6 +166,37 @@ export const router = createBrowserRouter([
         {
           index: true,
           element: <Navigate to={'dashboard'} replace/>
+        }
+      ]
+    },
+    {
+      path: 'community',
+      element: <CrimeProvider><CommunityModule /></CrimeProvider>,
+      errorElement: <ErrorComponent />,
+      children: [
+        {
+          path: 'my-report',
+          element: <MyReportOutlet />,
+          errorElement: <ErrorComponent />,
+        },
+        {
+          path: 'report',
+          element: <CommunityReportOutlet />,
+          errorElement: <ErrorComponent />,
+        },
+        {
+          path: 'quick-response',
+          element: <QuickResponseOutlet />,
+          errorElement: <ErrorComponent />,
+        },
+        {
+          path: 'profile',
+          element: <ProfileOutlet />,
+          errorElement: <ErrorComponent />,
+        },
+        {
+          index: true,
+          element: <Navigate to={'my-report'} replace/>
         }
       ]
     },
