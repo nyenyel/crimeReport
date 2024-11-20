@@ -211,14 +211,14 @@ export default function PublicModule() {
         </>
         }
 
-        <div className='relative flex h-screen overflow-hidden'>
+        <div className='relative flex h-screen overflow-hidden max-[740px]:overflow-y-auto'>
             <div
                 className='absolute -inset-4 bg-cover bg-no-repeat blur-md'
                 style={{ backgroundImage: `url(${bgImage})` }}
             ></div>
             <div className='flex-1'></div>
             {/* <div className='relative flex-1 flex justify-center'> */}
-            <div className="flex min-h-screen justify-center items-center">
+            <div className="flex min-h-screen justify-center items-center ">
                 <div className='flex-1 bg-gradient-to-l from-src to-prc rounded-r-lg p-10 text-sec-text flex flex-col justify-center z-10'>
                     <NavLink to={'/'} replace={true}>
                         <Logo />
@@ -226,7 +226,7 @@ export default function PublicModule() {
                     <div className='mt-6 text-4xl font-bold '>Crime Report</div>
                     <div className='mt-1 text-lg mb-5 '>Please describe the crime your reporting.</div>
 
-                    <form className=' w-full' onSubmit={handleSubmmit}>
+                    <form className=' w-full ' onSubmit={handleSubmmit}>
                         <div className='flex flex-col'>
                             <div className=''>
                                 <label className='title text-sm '>Full Name</label>

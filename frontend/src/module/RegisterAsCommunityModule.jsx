@@ -82,10 +82,10 @@ export default function RegisterAsCommunityModule() {
                     <div className='mt-1 text-lg mb-4 '>Please enter your credentials!</div>
 
                     <form className='flex flex-col text-white' onSubmit={handleSubmit} >
-                        <div className='flex flex-col'>
+                        <div className='flex flex-col '>
 
                             <div className='bg-prc h-0.5 w-96 mt-1 bg-opacity-30 rounded-full'/>
-                            <div className='flex-1 flex gap-4 mt-2'>
+                            <div className='flex-1 flex gap-4 mt-2 max-[400px]:flex-col'>
                                 <div className='flex-1 flex flex-col'>
                                     <label className='text-sm font-regular'>Username</label>
                                     <input type='text' name='username' onChange={handleChange} value={newDataForm?.username || ''} className='font-medium border-b-2 px-2 py-1 bg-gray-400 bg-opacity-5' placeholder='Username'/>

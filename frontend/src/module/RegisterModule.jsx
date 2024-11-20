@@ -108,7 +108,7 @@ export default function RegisterModule() {
                                     ))}
                                 </div>
                             </div>
-                            <div className='flex-1 flex gap-4 mt-2'>
+                            <div className='flex-1 flex gap-4 mt-2 max-[740px]:flex-col'>
                                 <div className='flex-1 flex flex-col'>
                                     <label className='text-sm font-regular'>Username</label>
                                     <input type='text' name='username' onChange={handleChange} value={newDataForm?.username || ''} className='font-medium border-b-2 px-2 py-1 bg-gray-400 bg-opacity-5' placeholder='Username'/>
