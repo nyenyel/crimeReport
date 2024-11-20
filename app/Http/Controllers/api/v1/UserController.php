@@ -77,6 +77,19 @@ class UserController extends Controller
         return UserResource::collection($data);
     }
 
+    public function getCommunity()
+    {
+        $data = User::where('lib_role_id', null)->get();
+        $data->load($this->relation);
+        return UserResource::collection($data);
+    }
+    public function getAllPNP()
+    {
+        $data = User::where('lib_role_id', 2)->get();
+        $data->load($this->relation);
+        return UserResource::collection($data);
+    }
+
     public function communityUser(VerifyCommunityUserRequest $request, User $user)
     {
         $data = $request->validated();
