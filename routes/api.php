@@ -61,6 +61,7 @@ Route::prefix('v1')->group(function () {
             Route::get('pnp-resolved/{user}', [ReportController::class, 'pnpResolved']);
             Route::get('pnp-unresolved/{user}', [ReportController::class, 'pnpUnresolved']);
             Route::get('dashboard', [ReportController::class, 'dashboard']);
+            Route::post('quick-response', [ReportController::class, 'quickResponse']);
             Route::put('community-user/{user}', [UserController::class, 'communityUser']);
 
         });
