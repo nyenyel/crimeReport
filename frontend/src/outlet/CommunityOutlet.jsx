@@ -31,7 +31,7 @@ export default function CommunityOutlet() {
                 <table className="w-full text-sm text-left text-gray-500">
                     <caption className="p-5  text-lg font-semibold text-left text-white bg-prc ">
                         Community System Users
-                        <p className="mt-1 text-sm font-normal text-white text-opacity-90 ">Browse the list of verifed and to be verfied PNP users.</p>
+                        <p className="mt-1 text-sm font-normal text-white text-opacity-90 ">Browse the list of verified and to be verified Community Users.</p>
                     </caption>
                     <thead className="text-xs text-white uppercase bg-prc bg-opacity-80 ">
                         <tr>
@@ -45,16 +45,7 @@ export default function CommunityOutlet() {
                                 Phone No.
                             </th>
                             <th scope="col" className="px-6 py-3">
-                                Badge No.
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                                Rank
-                            </th>
-                            <th scope="col" className="px-6 py-3">
                                 Gender
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                                Station
                             </th>
                             <th scope="col" className="px-6 py-3">
                                 Status
@@ -78,16 +69,7 @@ export default function CommunityOutlet() {
                               {item?.phone_no}
                             </td>
                             <td className="px-6 py-4">
-                              {item?.badge_no ?? 'Community'}
-                            </td>
-                            <td className="px-6 py-4">
-                              {item?.rank?.desc ?? 'Community'}
-                            </td>
-                            <td className="px-6 py-4">
                               {item?.gender.desc}
-                            </td>
-                            <td className="px-6 py-4">
-                              {item?.station?.address ?? 'Community'}
                             </td>
                             <td className="px-6 py-4">
                               {item?.isVerified === 1 ? 'Verified': 'Pending'}

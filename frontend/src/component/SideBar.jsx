@@ -199,7 +199,8 @@ export default function SideBar() {
                     </div>
                 </div>
             }
-                <div className='bg-prc max-[740px]:hidden text-sec-text rounded-r-2xl h-screen min-w-72'>
+                <div className='bg-prc max-[740px]:hidden text-sec-text rounded-r-2xl min-w-72 sticky top-0 h-screen overflow-y-auto'>
+
                     <div className='mx-6 py-6'>
                         <Logo/>
                     </div>
@@ -298,7 +299,8 @@ export default function SideBar() {
                     </div>
                 </div>
             }
-                <div className='bg-prc max-[740px]:hidden text-sec-text rounded-r-2xl h-screen min-w-72'>
+                <div className='bg-prc max-[740px]:hidden text-sec-text rounded-r-2xl min-w-72 sticky top-0 h-screen overflow-y-auto'>
+
                     <div className='mx-6 py-6'>
                         <Logo/>
                     </div>

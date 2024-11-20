@@ -212,7 +212,7 @@ export function ReportOutlet() {
         </>
         }
 
-        <div className='relative flex h-screen overflow-hidden'>
+        <div className='relative flex h-screen overflow-hidden max-[740px]:overflow-y-auto'>
 
             {/* <div className='flex-1'></div> */}
             {/* <div className='relative flex-1 flex justify-center'> */}
