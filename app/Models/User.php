@@ -38,7 +38,7 @@ class User extends Authenticatable
         'lib_gender_id',
         'lib_station_id',
         'lib_rank_id',
-        'isVerified'
+        'isVerified',
     ];
 
     /**
@@ -87,5 +87,8 @@ class User extends Authenticatable
     }
     public function unResolved(): HasMany {
         return $this->hasMany(Report::class, 'dispatch_user')->where('lib_status_id', 4);
+    }
+    public function reports(): HasMany {
+        return $this->hasMany(Report::class, 'reporter_account');
     }
 }

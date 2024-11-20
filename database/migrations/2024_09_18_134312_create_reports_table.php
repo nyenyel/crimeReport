@@ -22,9 +22,11 @@ return new class extends Migration
             $table->unsignedBigInteger('lib_status_id');
             $table->unsignedBigInteger('lib_category_id');
             $table->unsignedBigInteger('location_id');
+            $table->unsignedBigInteger('reporter_account')->nullable();
             $table->foreign('lib_status_id')->references('id')->on('lib_statuses');
             $table->foreign('lib_category_id')->references('id')->on('lib_categories');
             $table->foreign('location_id')->references('id')->on('locations');
+            $table->foreign('reporter_account')->references('id')->on('users');
             $table->timestamps();
         });
     }

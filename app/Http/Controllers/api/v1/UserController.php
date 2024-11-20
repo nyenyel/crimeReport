@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CommunityAccountRegisterRequest;
 use App\Http\Requests\Update\UserUpdateRequest;
+use App\Http\Requests\VerifyCommunityUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -68,5 +70,17 @@ class UserController extends Controller
         $data = User::where('lib_role_id', 2)->where('isVerified', true)->get();
         $data->load($this->relation);
         return UserResource::collection($data);
+    }
+
+    public function communityUser(VerifyCommunityUserRequest $request, User $user)
+    {
+        $data = $request->validated();
+        if($data['password']=== null){
+            $data['password'] = bcrypt($user->password); 
+        }
+
+        $user->update($data);
+        $user->load($this->relation);
+        return response()->json(['res' => $data]);
     }
 }
