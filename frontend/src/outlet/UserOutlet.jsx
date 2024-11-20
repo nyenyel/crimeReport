@@ -40,7 +40,7 @@ export default function UserOutlet() {
                     <thead className="text-xs text-white uppercase bg-prc bg-opacity-80 ">
                         <tr>
                             <th scope="col" className="px-6 py-3">
-                                Full Name
+                                Full Name/Username
                             </th>
                             <th scope="col" className="px-6 py-3">
                                 E-mail
@@ -72,7 +72,8 @@ export default function UserOutlet() {
                       {data?.map((item, index)=> (
                         <tr className="bg-white border-b" key={index}>
                             <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                                {item?.last_name}, {item?.first_name} {item?.middle_name.charAt(0)}.
+                                {item?.role ? `${item?.last_name}, ${item?.first_name} ${item?.middle_name?.charAt(0)}.` : 'Community'}
+                                {console.log(item)}
                             </th>
                             <td className="px-6 py-4">
                                 {item?.email}
@@ -81,16 +82,16 @@ export default function UserOutlet() {
                               {item?.phone_no}
                             </td>
                             <td className="px-6 py-4">
-                              {item?.badge_no}
+                              {item?.badge_no ?? 'Community'}
                             </td>
                             <td className="px-6 py-4">
-                              {item?.rank.desc}
+                              {item?.rank?.desc ?? 'Community'}
                             </td>
                             <td className="px-6 py-4">
                               {item?.gender.desc}
                             </td>
                             <td className="px-6 py-4">
-                              {item?.station.address}
+                              {item?.station?.address ?? 'Community'}
                             </td>
                             <td className="px-6 py-4">
                               {item?.isVerified === 1 ? 'Verified': 'Pending'}

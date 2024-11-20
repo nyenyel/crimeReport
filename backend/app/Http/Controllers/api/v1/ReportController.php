@@ -12,9 +12,11 @@ use App\Models\Library\LibStation;
 use App\Models\Location;
 use App\Models\Report;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class ReportController extends Controller
@@ -41,8 +43,14 @@ class ReportController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(ReportStoreRequest $request)
-    {
+{
+    try {
+        // Log the start of the function
+        Log::info('Store function started.');
+
         $data = $request->validated();
+        Log::info('Validated data:', $data);
+
         $categoryExist = LibCategory::where('desc', $data['info']['category'])->first();
         if($categoryExist){
             $data['info']['lib_category_id'] = $categoryExist['id'];
@@ -53,26 +61,25 @@ class ReportController extends Controller
 
         $location = Location::create($data['location']);
         $data['info']['location_id'] = $location->id;
+        Log::info('Location created:', ['location_id' => $location->id]);
 
-        
+        // Handle file uploads
         if ($request->hasFile('identification')) {
             $file = $request->file('identification');  
             if (is_array($file)) {
-                // Handle multiple files if needed
                 foreach ($file as $f) {
-                    $filePath = $f->store('identification', 'public');  // Store each file
-                    $url = asset('storage/' . $filePath);  // Get URL for each file
-                    // Do something with each file URL (e.g., save it to the database)
-                    $data['info']['id_verification'] = $url;  // Store as an array of URLs
+                    $filePath = $f->store('identification', 'public');
+                    $url = asset('storage/' . $filePath);
+                    Log::info('Identification file stored:', ['url' => $url]);
+                    $data['info']['id_verification'] = $url;
                 }
             } else {
-                // Handle a single file upload
                 $filePath = $file->store('identification', 'public');
                 $url = asset('storage/' . $filePath);
-                $data['info']['id_verification'] = $url;  // Save the URL
+                Log::info('Single identification file stored:', ['url' => $url]);
+                $data['info']['id_verification'] = $url;
             }
         }
-
 
         $code = Str::random(20);
         $password = Str::random(10);
@@ -81,20 +88,32 @@ class ReportController extends Controller
         $data['info']['password'] = $hash; 
         $report = Report::create($data['info']);
 
+        // Log successful report creation
+        Log::info('Report created:', ['report_id' => $report->id]);
+
+        // Handle evidence files
         if ($request->hasFile('evidence')) {
             foreach ($request->file('evidence') as $file) {
                 $filePath = $file->store('evidence', 'public');
                 $url = asset('storage/' . $filePath);
-                // Step 4.2: Create an Evidence record for each file
                 Evidence::create([
-                    'report_id' => $report->id, // link to the report
-                    'image' => $url,         // store the file path
+                    'report_id' => $report->id,
+                    'image' => $url,
                 ]);
+                Log::info('Evidence file stored:', ['url' => $url]);
             }
         }
 
         return response()->json(['code' => $code, 'password' => $password]);
+    } catch (Exception $e) {
+        // Log the error if something goes wrong
+        Log::error('Error occurred in store function: ' . $e->getMessage(), [
+            'error' => $e->getTraceAsString(),
+        ]);
+
+        return response()->json(['error' => 'An error occurred while processing the request.'], 500);
     }
+}
 
     /**
      * Display the specified resource.

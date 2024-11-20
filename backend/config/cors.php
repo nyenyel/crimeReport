@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['http://localhost:5173, https://crime-report.io'],
+    'allowed_origins' => ['http://localhost:5173',' https://crimereport.site'],
 
     'allowed_origins_patterns' => [],
 

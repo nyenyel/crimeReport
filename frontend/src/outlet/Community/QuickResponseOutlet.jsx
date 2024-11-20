@@ -1,20 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import LoginRedirect from '../component/LoginRedirect'
-import AlreadyLoginRedirect from '../component/AlreadyLoginRedirect'
-import Logo from '../component/Logo'
-import Loading from '../component/Loading'
-import bgImage from '../resource/bg.jpg'
-import { baseURL, crud } from '../resource/api'
+import React, { useContext, useEffect, useState } from 'react'
+import LoginRedirect from '../../component/LoginRedirect'
+import AlreadyLoginRedirect from '../../component/AlreadyLoginRedirect'
+import Logo from '../../component/Logo'
+import Loading from '../../component/Loading'
+import bgImage from '../../resource/bg.jpg'
+import { baseURL, crud } from '../../resource/api'
 import axios from 'axios'
 import { NavLink } from 'react-router-dom'
-import { getCurrentLocation } from './LoginModule'
-import { useCrimeContext } from '../context/CrimeContext'
+import { getCurrentLocation } from '../../module/LoginModule'
+import { useCrimeContext } from '../../context/CrimeContext'
+import { AppContext } from '../../context/AppContext'
 
-export default function PublicModule() {
+export function QuickResponseOutlet() {
     const {crimeCategories, municipality} = useCrimeContext()
+    const {user, apiClient} = useContext(AppContext)
     const [loading, setLoading] = useState(false)
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [location,setLocation] = useState([]);
+    const [pnp,setPNP] = useState([]);
+    const [nearest, setNearest] = useState([]);
     const [selectedMunicipality, setSelectedMunicipality] = useState("");
     const [barangays, setBarangays] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("");
@@ -101,7 +105,6 @@ export default function PublicModule() {
     const currentLocation = async () => {
         try{
             setLoading(true)
-
             const data = await getCurrentLocation()
             setLocation(data)
         } catch {
@@ -110,13 +113,32 @@ export default function PublicModule() {
             setLoading(false)
         }
     }
+
+
     useEffect(()=> {
         currentLocation()
+        const getPnp = async () => {
+            try{
+                setLoading(true)
+                const response = await apiClient.get(`v1/crud/get-pnp`)
+                setPNP(response.data.data)
+            } catch {
+                console.log("error")
+            } finally {
+                setLoading(false)
+            }
+        }
+        getPnp()
     }, [])
 
+    useEffect (() => {
+        if(pnp){
+            setNearest(findNearestUser(pnp, location)?.user?.id)
+        }
+    }, [pnp])
     const[reportForm, setReportForm] = useState({
         info: {
-            lib_status_id: 1,
+            lib_status_id: 4,
             title: '',
             desc: '',
             reporter_name: '',
@@ -134,7 +156,9 @@ export default function PublicModule() {
             ...prev,
             info: {
                 ...prev.info,
-                [name]: name === 'address' ? prev.info.addressmun + ', ' + value : value
+                [name]: name === 'address' ? prev.info.addressmun + ', ' + value : value,
+                reporter_account: user?.data?.id,
+                dispatch_user: nearest
             },
             location: {
                 ...prev.location,
@@ -142,7 +166,6 @@ export default function PublicModule() {
                 lat: location.lat,
             }
         }));
-
     }
     const handleFileChange = (event) => {
         setReportForm((prev) => ({
@@ -190,7 +213,6 @@ export default function PublicModule() {
     return (
         <>
         {loading && (<Loading />)}
-        <AlreadyLoginRedirect />
         {modal && 
         <>
             <div className="absolute z-50 bg-black w-full h-full bg-opacity-60 flex items-center justify-center">
@@ -203,7 +225,7 @@ export default function PublicModule() {
                     </div>
                     <div className='mt-2 text-sm font-normal'>To track your report save this link and password before reloading or exiting</div>
                     <div className='mt-2 text-sm font-normal'>Link</div>
-                    <div className='text-sm font-normal bg-white text-prc p-4 rounded-md'>{`https://crimereport.ste/${reportTracker.code}`}</div>
+                    <div className='text-sm font-normal bg-white text-prc p-4 rounded-md'>{`https://crimereport.site/${reportTracker.code}`}</div>
                     <div className='mt-2 text-sm font-normal'>Password</div>
                     <div className='text-sm font-normal bg-white text-prc p-4 rounded-md'>{`${reportTracker.password}`}</div>
                 </div>
@@ -212,19 +234,18 @@ export default function PublicModule() {
         }
 
         <div className='relative flex h-screen overflow-hidden'>
-            <div
-                className='absolute -inset-4 bg-cover bg-no-repeat blur-md'
-                style={{ backgroundImage: `url(${bgImage})` }}
-            ></div>
-            <div className='flex-1'></div>
+
+            {/* <div className='flex-1'></div> */}
             {/* <div className='relative flex-1 flex justify-center'> */}
-            <div className="flex min-h-screen justify-center items-center">
-                <div className='flex-1 bg-gradient-to-l from-src to-prc rounded-r-lg p-10 text-sec-text flex flex-col justify-center z-10'>
-                    <NavLink to={'login'} replace={true}>
+            <div className="flex min-h-screen w-full justify-center items-center">
+            {/* bg-gradient-to-l from-src to-prc text-sec-text */}
+                <div className='flex-1 rounded-r-lg p-10 bg-white rounded-md drop-shadow-sm  flex flex-col justify-center z-10'>
+                    {/* <NavLink to={'login'} replace={true}>
                         <Logo />
-                    </NavLink>
-                    <div className='mt-6 text-4xl font-bold '>Crime Report</div>
-                    <div className='mt-1 text-lg mb-5 '>Please describe the crime your reporting.</div>
+                    </NavLink> */}
+                    <div className='mt-6 text-4xl font-bold '>Quick Response</div>
+                    <div className='mt-1 text-lg '>Please describe the crime your reporting.</div>
+                    <div className='mt-1 mb-5 flex mr-2 text-red-800 text-xl'> <p className='mr-1'>WARNING!!!</p>Upon sending this report the nearest Police officer will be notify about the report and be dispatched immidietly to your location.</div>
 
                     <form className=' w-full' onSubmit={handleSubmmit}>
                         <div className='flex flex-col'>
@@ -323,11 +344,12 @@ export default function PublicModule() {
                             </label>
                         </div>
 
-                        <button type='submit' className='w-full bg-src py-2 rounded-md mt-4'>Send Report</button>
+                        <button type='submit' className='w-full bg-src py-2 text-white rounded-md mt-4'>Send Report</button>
                     </form>
                 </div>
             </div>
-            <div className='flex-1'></div>
+            {/* <div className='flex-1'></div> */}
+
             {privacyAndTermsModal &&
             <>
                 <div className="absolute z-50 bg-black w-full h-full bg-opacity-60 flex items-center justify-center">
@@ -425,4 +447,32 @@ export default function PublicModule() {
         </div>
         </>
     )
+}
+
+function findNearestUser(users, reportLocation) {
+    if (!reportLocation) return null;
+
+    // Initialize variables to track the nearest user and smallest distance
+    let nearestUser = null;
+    let smallestDistance = Infinity;
+
+    users.forEach(user => {
+        const userLocation = user?.location;
+
+        if (userLocation) {
+            const distance = L.latLng(reportLocation.lat, reportLocation.long).distanceTo(
+                L.latLng(userLocation.lat, userLocation.long)
+            );
+
+            if (distance < smallestDistance) {
+                smallestDistance = distance;
+                nearestUser = user;
+            }
+        }
+
+    });
+    // Return the nearest user and the distance in kilometers
+    return nearestUser
+        ? { user: nearestUser, distance: (smallestDistance / 1000).toFixed(2) }
+        : null;
 }

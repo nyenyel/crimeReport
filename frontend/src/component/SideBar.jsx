@@ -29,6 +29,7 @@ export default function SideBar() {
 
         } 
     }
+
     if(role === 'Admin'){
         return (
             <>
@@ -166,6 +167,105 @@ export default function SideBar() {
                             <div className=' mt-0.5 font-semibold text-lg'>Profile</div>
                         </NavLink>
                         <div onClick={handleModal} className='flex cursor-pointer content-center px-6 '>
+                            <div className='content-center font-extrabold'>
+                                <span className="icon-[iconamoon--arrow-right-2-duotone] h-8 w-8"></span>
+                            </div>
+                            <div className='mr-2 content-center'>
+                                <span className="icon-[majesticons--door-exit] h-7 w-7"></span>
+                            </div>
+                            <div className=' mt-0.5 font-semibold text-lg'>Logout</div>
+                        </div>
+                    </div>
+                    {/* <div className='bg-white w-full mb-4 h-0.5 bg-opacity-20' /> */}
+                </div>
+            </>
+        )
+    } else if(role === 'community'){
+        return (
+            <>
+            {loading && <Loading />}
+            {modal && 
+                <div className="absolute z-50 bg-black w-full h-full bg-opacity-60 flex items-center justify-center">
+                    <div className="bg-prc drop-shadow text-md font-bold p-5 text-white rounded-md">
+                        Logging Out
+                        <div className="mt-2 text-sm font-normal">
+                            Are you sure you want to logut now?
+                        </div>
+                        <div className='flex'>
+                            <div className='flex-1'></div>
+                            <div className="flex-none mt-2 text-sm font-normal hover:underline cursor-pointer p-2" onClick={handleModal}>Cancel</div>
+                            <div className="flex-none mt-2 text-sm font-normal rounded-md hover:bg-gray-100 hover:text-prc cursor-pointer p-2" onClick={logout}>Logout</div>
+                        </div>
+                    </div>
+                </div>
+            }
+                <div className='bg-prc text-sec-text rounded-r-2xl h-screen min-w-72'>
+                    <div className='mx-6 py-6'>
+                        <Logo/>
+                    </div>
+                    <div className='bg-white w-full mb-4 h-0.5 bg-opacity-20' />
+                    <div className=' mb-6'>
+                        <div className='mx-6 font-bold text-xs mb-3'>OVERVIEW</div>
+                        <NavLink to={'my-report'} 
+                            className={({ isActive }) => {
+                                return `rounded-xl flex content-center px-6 ${isActive && 'border-b-2 bg-src pt-2 mx-4'}`
+                            }}
+                        >
+                            <div className='content-center font-extrabold'>
+                            <span className="icon-[iconamoon--arrow-right-2-duotone] h-8 w-8"></span>
+
+                            </div>
+                            <div className='mr-2 content-center'>
+                                <span className="icon-[mage--dashboard-fill] h-7 w-7"></span>
+                            </div>
+                            <div className=' mt-0.5 font-semibold text-lg'>My Reports</div>
+                        </NavLink>
+                    </div>
+                    <div className='bg-white w-full mb-4 h-0.5 bg-opacity-20' />
+                    <div className=' mb-6 flex flex-col gap-2'>
+                        <div className='mx-6 font-bold text-xs mb-2 '>CRIME MANAGEMENT</div>
+                        <NavLink to={'report'} className={({ isActive }) => {
+                                return `rounded-xl flex content-center px-6 ${isActive && 'border-b-2 bg-src pt-2 mx-4'}`
+                            }}
+                        >
+                            <div className='content-center font-extrabold'>
+                                <span className="icon-[iconamoon--arrow-right-2-duotone] h-8 w-8"></span>
+                            </div>
+                            <div className='mr-2 content-center'>
+                                <span className="icon-[ph--police-car-fill] h-7 w-7"></span>
+                            </div>
+                            <div className=' mt-0.5 font-semibold text-lg'>Report</div>
+                        </NavLink>
+                        <NavLink to={'quick-response'} className={({ isActive }) => {
+                                return `rounded-xl flex content-center px-6 ${isActive && 'border-b-2 bg-src pt-2 mx-4'}`
+                            }}
+                        >
+                            <div className='content-center font-extrabold'>
+                                <span className="icon-[iconamoon--arrow-right-2-duotone] h-8 w-8"></span>
+                            </div>
+                            <div className='mr-2 content-center'>
+                                <span className="icon-[mage--message-check-fill] h-7 w-7"></span>
+                            </div>
+                            <div className=' mt-0.5 font-semibold text-lg'>Quick Response</div>
+                        </NavLink>
+                    </div>
+                    
+                    <div className='bg-white w-full mb-4 h-0.5 bg-opacity-20' />
+                    <div className=' mb-6 flex flex-col gap-2'>
+                        <div className='mx-6 font-bold text-xs mb-2'>ACCOUNT</div>
+                        <NavLink to={'profile'} className={({ isActive }) => {
+                                return `rounded-xl flex content-center px-6 ${isActive && 'border-b-2 bg-src pt-2 mx-4'}`
+                            }}
+                        >
+                            <div className='content-center font-extrabold'>
+                                <span className="icon-[iconamoon--arrow-right-2-duotone] h-8 w-8"></span>
+                            </div>
+                            <div className='mr-2 content-center'>
+                                <span className="icon-[mdi--user] h-7 w-7"></span>
+                            </div>
+                            <div className=' mt-0.5 font-semibold text-lg'>Profile</div>
+                        </NavLink>
+                        <div onClick={logout} className='flex cursor-pointer content-center px-6 '>
                             <div className='content-center font-extrabold'>
                                 <span className="icon-[iconamoon--arrow-right-2-duotone] h-8 w-8"></span>
                             </div>
