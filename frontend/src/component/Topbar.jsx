@@ -1,15 +1,18 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Logo from './Logo'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
 import Loading from './Loading'
 
-export default function SideBar() {
+export default function Topbar() {
     const {apiClient, role, setToken} =useContext(AppContext)
     const [loading, setLoading ] = useState(false)
+    const [toggle, setToggle ] = useState(false)
+    const handleToggler = () => setToggle(!toggle)
     const [modal, setModal] = useState(false)
     const handleModal = () => setModal(!modal)
     const nav = useNavigate()
+    const location = useLocation()
     const logout = async (e) => {
         setLoading(true)
         handleModal()
@@ -30,6 +33,7 @@ export default function SideBar() {
         } 
     }
 
+
     if(role === 'Admin'){
         return (
             <>
@@ -49,14 +53,16 @@ export default function SideBar() {
                     </div>
                 </div>
             }
-                <div className='bg-prc max-[740px]:hidden text-sec-text rounded-r-2xl min-w-72 sticky top-0 h-screen overflow-y-auto'>
-                    <div className='mx-6 py-6'>
-                        <Logo/>
-                    </div>
+                <div>
+                  <div className='px-6 py-6 bg-prc cursor-pointer' onClick={handleToggler}>
+                    <Logo/>
+                  </div>
+                </div>
+                <div className={`${toggle ? '': 'hidden absolute '} bg-prc text-sec-text  min-w-72 sticky top-0 h-screen overflow-y-auto`}>
                     <div className='bg-white w-full mb-4 h-0.5 bg-opacity-20' />
                     <div className=' mb-6'>
                         <div className='mx-6 font-bold text-xs mb-3'>OVERVIEW</div>
-                        <NavLink to={'dashboard'} 
+                        <NavLink to={'dashboard'} onClick={handleToggler}
                             className={({ isActive }) => {
                                 return `rounded-xl flex content-center px-6 ${isActive && 'border-b-2 bg-src pt-2 mx-4'}`
                             }}
@@ -74,7 +80,7 @@ export default function SideBar() {
                     <div className='bg-white w-full mb-4 h-0.5 bg-opacity-20' />
                     <div className=' mb-6 flex flex-col gap-2'>
                         <div className='mx-6 font-bold text-xs mb-2 '>CRIME MANAGEMENT</div>
-                        <NavLink to={'report'} className={({ isActive }) => {
+                        <NavLink to={'report'} onClick={handleToggler} className={({ isActive }) => {
                                 return `rounded-xl flex content-center px-6 ${isActive && 'border-b-2 bg-src pt-2 mx-4'}`
                             }}
                         >
@@ -86,7 +92,7 @@ export default function SideBar() {
                             </div>
                             <div className=' mt-0.5 font-semibold text-lg'>Report</div>
                         </NavLink>
-                        <NavLink to={'dispatch'} className={({ isActive }) => {
+                        <NavLink to={'dispatch'} onClick={handleToggler} className={({ isActive }) => {
                                 return `rounded-xl flex content-center px-6 ${isActive && 'border-b-2 bg-src pt-2 mx-4'}`
                             }}
                         >
@@ -98,7 +104,7 @@ export default function SideBar() {
                             </div>
                             <div className=' mt-0.5 font-semibold text-lg'>Dispatched</div>
                         </NavLink>
-                        <NavLink to={'declined'} className={({ isActive }) => {
+                        <NavLink to={'declined'} onClick={handleToggler} className={({ isActive }) => {
                                 return `rounded-xl flex content-center px-6 ${isActive && 'border-b-2 bg-src pt-2 mx-4'}`
                             }}
                         >
@@ -110,7 +116,7 @@ export default function SideBar() {
                             </div>
                             <div className=' mt-0.5 font-semibold text-lg'>Declined</div>
                         </NavLink>
-                        <NavLink to={'accepted'} className={({ isActive }) => {
+                        <NavLink to={'accepted'} onClick={handleToggler} className={({ isActive }) => {
                                 return `rounded-xl flex content-center px-6 ${isActive && 'border-b-2 bg-src pt-2 mx-4'}`
                             }}
                         >
@@ -126,7 +132,7 @@ export default function SideBar() {
                     <div className='bg-white w-full mb-4 h-0.5 bg-opacity-20' />
                     <div className=' mb-6 flex flex-col gap-2'>
                         <div className='mx-6 font-bold text-xs mb-2'>SYSTEM MANAGEMENT</div>
-                        <NavLink to={'user'} className={({ isActive }) => {
+                        <NavLink to={'user'} onClick={handleToggler} className={({ isActive }) => {
                                 return `rounded-xl flex content-center px-6 ${isActive && 'border-b-2 bg-src pt-2 mx-4'}`
                             }}
                         >
@@ -138,7 +144,7 @@ export default function SideBar() {
                             </div>
                             <div className=' mt-0.5 font-semibold text-lg'>User</div>
                         </NavLink>
-                        <NavLink to={'station'} className={({ isActive }) => {
+                        <NavLink to={'station'} onClick={handleToggler} className={({ isActive }) => {
                                 return `rounded-xl flex content-center px-6 ${isActive && 'border-b-2 bg-src pt-2 mx-4'}`
                             }}
                         >
@@ -154,7 +160,7 @@ export default function SideBar() {
                     <div className='bg-white w-full mb-4 h-0.5 bg-opacity-20' />
                     <div className=' mb-6 flex flex-col gap-2'>
                         <div className='mx-6 font-bold text-xs mb-2'>ACCOUNT</div>
-                        <NavLink to={'profile'} className={({ isActive }) => {
+                        <NavLink to={'profile'} onClick={handleToggler} className={({ isActive }) => {
                                 return `rounded-xl flex content-center px-6 ${isActive && 'border-b-2 bg-src pt-2 mx-4'}`
                             }}
                         >
@@ -199,14 +205,16 @@ export default function SideBar() {
                     </div>
                 </div>
             }
-                <div className='bg-prc max-[740px]:hidden text-sec-text rounded-r-2xl h-screen min-w-72'>
-                    <div className='mx-6 py-6'>
-                        <Logo/>
-                    </div>
+                <div>
+                  <div className='px-6 py-6 bg-prc cursor-pointer' onClick={handleToggler}>
+                    <Logo/>
+                  </div>
+                </div>
+                <div className={`${toggle ? '': 'hidden absolute '} bg-prc text-sec-text  min-w-72 sticky top-0 h-screen overflow-y-auto`}>
                     <div className='bg-white w-full mb-4 h-0.5 bg-opacity-20' />
                     <div className=' mb-6'>
                         <div className='mx-6 font-bold text-xs mb-3'>OVERVIEW</div>
-                        <NavLink to={'my-report'} 
+                        <NavLink to={'my-report'} onClick={handleToggler}
                             className={({ isActive }) => {
                                 return `rounded-xl flex content-center px-6 ${isActive && 'border-b-2 bg-src pt-2 mx-4'}`
                             }}
@@ -224,7 +232,7 @@ export default function SideBar() {
                     <div className='bg-white w-full mb-4 h-0.5 bg-opacity-20' />
                     <div className=' mb-6 flex flex-col gap-2'>
                         <div className='mx-6 font-bold text-xs mb-2 '>CRIME MANAGEMENT</div>
-                        <NavLink to={'report'} className={({ isActive }) => {
+                        <NavLink to={'report'} onClick={handleToggler} className={({ isActive }) => {
                                 return `rounded-xl flex content-center px-6 ${isActive && 'border-b-2 bg-src pt-2 mx-4'}`
                             }}
                         >
@@ -236,7 +244,7 @@ export default function SideBar() {
                             </div>
                             <div className=' mt-0.5 font-semibold text-lg'>Report</div>
                         </NavLink>
-                        <NavLink to={'quick-response'} className={({ isActive }) => {
+                        <NavLink to={'quick-response'} onClick={handleToggler} className={({ isActive }) => {
                                 return `rounded-xl flex content-center px-6 ${isActive && 'border-b-2 bg-src pt-2 mx-4'}`
                             }}
                         >
@@ -253,7 +261,7 @@ export default function SideBar() {
                     <div className='bg-white w-full mb-4 h-0.5 bg-opacity-20' />
                     <div className=' mb-6 flex flex-col gap-2'>
                         <div className='mx-6 font-bold text-xs mb-2'>ACCOUNT</div>
-                        <NavLink to={'profile'} className={({ isActive }) => {
+                        <NavLink to={'profile'} onClick={handleToggler} className={({ isActive }) => {
                                 return `rounded-xl flex content-center px-6 ${isActive && 'border-b-2 bg-src pt-2 mx-4'}`
                             }}
                         >
@@ -298,14 +306,16 @@ export default function SideBar() {
                     </div>
                 </div>
             }
-                <div className='bg-prc max-[740px]:hidden text-sec-text rounded-r-2xl h-screen min-w-72'>
-                    <div className='mx-6 py-6'>
-                        <Logo/>
-                    </div>
+                <div>
+                  <div className='px-6 py-6 bg-prc cursor-pointer' onClick={handleToggler}>
+                    <Logo/>
+                  </div>
+                </div>
+                <div className={`${toggle ? '': 'hidden absolute '} bg-prc text-sec-text  min-w-72 sticky top-0 h-screen overflow-y-auto`}>
                     <div className='bg-white w-full mb-4 h-0.5 bg-opacity-20' />
                     <div className=' mb-6'>
                         <div className='mx-6 font-bold text-xs mb-3'>OVERVIEW</div>
-                        <NavLink to={'dashboard'} 
+                        <NavLink to={'dashboard'} onClick={handleToggler}
                             className={({ isActive }) => {
                                 return `rounded-xl flex content-center px-6 ${isActive && 'border-b-2 bg-src pt-2 mx-4'}`
                             }}
@@ -323,7 +333,7 @@ export default function SideBar() {
                     <div className='bg-white w-full mb-4 h-0.5 bg-opacity-20' />
                     <div className=' mb-6 flex flex-col gap-2'>
                         <div className='mx-6 font-bold text-xs mb-2 '>CRIME MANAGEMENT</div>
-                        <NavLink to={'dispatch'} className={({ isActive }) => {
+                        <NavLink to={'dispatch'} onClick={handleToggler} className={({ isActive }) => {
                                 return `rounded-xl flex content-center px-6 ${isActive && 'border-b-2 bg-src pt-2 mx-4'}`
                             }}
                         >
@@ -335,7 +345,7 @@ export default function SideBar() {
                             </div>
                             <div className=' mt-0.5 font-semibold text-lg'>Dispatched</div>
                         </NavLink>
-                        <NavLink to={'resolved'} className={({ isActive }) => {
+                        <NavLink to={'resolved'} onClick={handleToggler} className={({ isActive }) => {
                                 return `rounded-xl flex content-center px-6 ${isActive && 'border-b-2 bg-src pt-2 mx-4'}`
                             }}
                         >
@@ -352,7 +362,7 @@ export default function SideBar() {
                     <div className='bg-white w-full mb-4 h-0.5 bg-opacity-20' />
                     <div className=' mb-6 flex flex-col gap-2'>
                         <div className='mx-6 font-bold text-xs mb-2'>ACCOUNT</div>
-                        <NavLink to={'profile'} className={({ isActive }) => {
+                        <NavLink to={'profile'} onClick={handleToggler} className={({ isActive }) => {
                                 return `rounded-xl flex content-center px-6 ${isActive && 'border-b-2 bg-src pt-2 mx-4'}`
                             }}
                         >

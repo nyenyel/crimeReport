@@ -239,7 +239,7 @@ export function ReportOutlet() {
                                 />
                                 <div className='flex-1 flex-col flex mt-2'>
                                     <label className='title text-sm '>Address</label>
-                                    <div className='flex'>
+                                    <div className='flex max-[740px]:flex-col'>
                                         <select name="addressmun" required value={selectedMunicipality} onChange={handleMunicipalityChange} className='px-4 py-2 rounded text-black border-2 mr-2 bg-white w-full'>
                                             <option value="">Select Municipality</option>
                                             {municipality.map((municipality) => (
@@ -259,7 +259,7 @@ export function ReportOutlet() {
                                     </div>
 
                                 </div>
-                                <div className='flex gap-2 my-2'>
+                                <div className='flex gap-2 my-2 max-[740px]:flex-col'>
                                     <div className='flex-1'>
                                         <label className='title text-sm'>Select Crime Category</label>
                                         <select name='title' value={selectedCategory} required onChange={handleCategoryChange} className='px-4 py-2 rounded text-black border-2 bg-white w-full'>

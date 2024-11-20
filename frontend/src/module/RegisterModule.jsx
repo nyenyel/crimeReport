@@ -73,7 +73,7 @@ export default function RegisterModule() {
             ></div>
 
             <div className='relative flex-1 flex justify-end'>
-                <div className='flex-1'></div>
+                <div className='flex-1 max-[740px]:hidden'></div>
                 <div className='flex-1 bg-gradient-to-l from-src to-prc rounded-lg p-10 text-sec-text flex flex-col justify-center z-10'>
                     <NavLink to={'/'}>
                         <Logo />
@@ -81,11 +81,11 @@ export default function RegisterModule() {
                     <div className='mt-1 text-4xl font-bold '>Register</div>
                     <div className='mt-1 text-lg mb-4 '>Please enter your credentials!</div>
 
-                    <form className='flex flex-col text-white' onSubmit={handleSubmit} >
+                    <form className='flex max-[740px]:overflow-y-auto flex-col text-white' onSubmit={handleSubmit} >
                         <div className='flex flex-col'>
                             Basic Information
                             <div className='bg-prc h-0.5 w-96 mt-1 bg-opacity-30 rounded-full'/>
-                            <div className='flex-1 flex gap-4 mt-5'>
+                            <div className='flex-1 flex gap-4 mt-5 max-[740px]:flex-col'>
                                 <div className='flex-1 flex flex-col'>
                                     <label className='text-sm font-regular'>First Name</label>
                                     <input type='text' name='first_name' onChange={handleChange} value={newDataForm?.first_name || ''} className='font-medium border-b-2 px-2 py-1 bg-gray-400 bg-opacity-5' placeholder='First Name'/>
@@ -130,7 +130,7 @@ export default function RegisterModule() {
                                     </div>
                                 </div>
                             </div>
-                        <div className='flex-1 flex gap-4 mt-2'>
+                        <div className='flex-1 flex gap-4 mt-2 max-[740px]:flex-col'>
                                 <div className='flex-1 flex flex-col'>
                                     <label className='text-sm font-regular'>Phone No.</label>
                                     <input type='text' name='phone_no' onChange={handleChange} value={newDataForm?.phone_no || ''} className='font-medium border-b-2 px-2 py-1 bg-gray-400 bg-opacity-5' placeholder='Phone No'/>
@@ -147,10 +147,10 @@ export default function RegisterModule() {
                                 </div>
                             </div>
                         </div>
-                        <div className='flex flex-col mt-5'>
+                        <div className='flex flex-col mt-5 '>
                             Work Information
                             <div className='bg-prc h-0.5 w-96 mt-1 bg-opacity-30 rounded-full'/>
-                            <div className='flex-1 flex gap-4 mt-5'>
+                            <div className='flex-1 flex gap-4 mt-5 max-[740px]:flex-col'>
                                 <div className='flex-1 flex flex-col'>
                                     <label className='text-sm font-regular'>Badge No.</label>
                                     <input type='text' name='badge_no' onChange={handleChange} value={newDataForm?.badge_no || ''} className='font-medium border-b-2 px-2 py-1 bg-gray-400 bg-opacity-5' placeholder='Badge No'/>

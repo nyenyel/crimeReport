@@ -145,7 +145,7 @@ export default function ProfileOutlet() {
                                 </div>
                             </div>
                         </div>
-                    <div className='flex-1 flex gap-4 mt-2'>
+                    <div className='flex-1 flex gap-4 mt-2 max-[740px]:flex-col'>
                             <div className='flex-1 flex flex-col'>
                                 <label className='text-sm font-regular'>Phone No.</label>
                                 <input type='text' name='phone_no' onChange={handleChange} value={newDataForm?.phone_no || ''} className='font-medium border-b-2 px-2 py-1 bg-gray-400 bg-opacity-5' placeholder='Phone No'/>
@@ -162,10 +162,10 @@ export default function ProfileOutlet() {
                             </div>
                         </div>
                     </div>
-                    <div className='flex flex-col mt-5'>
+                    <div className='flex flex-col mt-5 '>
                         Work Information
                         <div className='bg-prc h-0.5 w-96 mt-1 bg-opacity-30 rounded-full'/>
-                        <div className='flex-1 flex gap-4 mt-5'>
+                        <div className='flex-1 flex gap-4 mt-5 max-[740px]:flex-col'>
                             <div className='flex-1 flex flex-col'>
                                 <label className='text-sm font-regular'>Badge No.</label>
                                 <input type='text' name='badge_no' onChange={handleChange} value={newDataForm?.badge_no || ''} className='font-medium border-b-2 px-2 py-1 bg-gray-400 bg-opacity-5' placeholder='Badge No'/>
@@ -263,7 +263,7 @@ export default function ProfileOutlet() {
                                 </div>
                             </div>
                         </div>
-                    <div className='flex-1 flex gap-4 mt-2'>
+                    <div className='flex-1 flex gap-4 mt-2 max-[740px]:flex-col'>
                             <div className='flex-1 flex flex-col'>
                                 <label className='text-sm font-regular'>Phone No.</label>
                                 <input type='text' name='phone_no' onChange={handleChange} value={newDataForm?.phone_no || ''} className='font-medium border-b-2 px-2 py-1 bg-gray-400 bg-opacity-5' placeholder='Phone No'/>

@@ -45,7 +45,7 @@ export default function StationOutlet() {
                 <div className='flex-1'/>
                 PNP Station Management
             </div>
-            <div className=' flex gap-2 mb-4'>
+            <div className=' flex gap-2 mb-4 max-[740px]:flex-col'>
               <div className='p-5  flex-1 text-lg text-text font-semibold bg-white rounded-md drop-shadow-sm '>
                 My Station
                 <div className='bg-prc h-0.5 w-72 mb-2'/>
