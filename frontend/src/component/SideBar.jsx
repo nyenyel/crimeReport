@@ -265,7 +265,7 @@ export default function SideBar() {
                             </div>
                             <div className=' mt-0.5 font-semibold text-lg'>Profile</div>
                         </NavLink>
-                        <div onClick={logout} className='flex cursor-pointer content-center px-6 '>
+                        <div onClick={handleModal} className='flex cursor-pointer content-center px-6 '>
                             <div className='content-center font-extrabold'>
                                 <span className="icon-[iconamoon--arrow-right-2-duotone] h-8 w-8"></span>
                             </div>
@@ -364,7 +364,7 @@ export default function SideBar() {
                             </div>
                             <div className=' mt-0.5 font-semibold text-lg'>Profile</div>
                         </NavLink>
-                        <div onClick={logout} className='flex cursor-pointer content-center px-6 '>
+                        <div onClick={handleModal} className='flex cursor-pointer content-center px-6 '>
                             <div className='content-center font-extrabold'>
                                 <span className="icon-[iconamoon--arrow-right-2-duotone] h-8 w-8"></span>
                             </div>

@@ -34,7 +34,7 @@ export default function UserVerifyOutlet() {
             } else {
                 const response = await apiClient.put(`v1/crud/community-user/${id}`, newDataForm)
             }
-            navigate(0)
+            navigate(0)  
         } catch  (error) {
             console.error("error: ", error.response.data.errors)
         } finally {

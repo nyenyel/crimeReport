@@ -48,13 +48,18 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request, User $user)
     {
         $data = $request->validated();
-        if($data['password']=== null){
-            $data['password'] = bcrypt($user->password); 
+
+        // Check if a new password is provided
+        if (!empty($data['password'])) {
+            $data['password'] = bcrypt($data['password']); // Hash the new password
+        } else {
+            unset($data['password']); // Remove password from the update if it's not being changed
         }
 
         $user->update($data);
         $user->load($this->relation);
-        return response()->json(['res' => $data]);
+
+        return response()->json(['res' => 'User updated successfully']);
     }
 
     /**
@@ -75,12 +80,17 @@ class UserController extends Controller
     public function communityUser(VerifyCommunityUserRequest $request, User $user)
     {
         $data = $request->validated();
-        if($data['password']=== null){
-            $data['password'] = bcrypt($user->password); 
-        }
 
+        // Check if a new password is provided
+        if (!empty($data['password'])) {
+            $data['password'] = bcrypt($data['password']); // Hash the new password
+        } else {
+            unset($data['password']); // Remove password from the update if it's not being changed
+        }
+    
         $user->update($data);
         $user->load($this->relation);
-        return response()->json(['res' => $data]);
+    
+        return response()->json(['res' => 'User updated successfully']);
     }
 }
