@@ -34,12 +34,12 @@ import { QuickResponseOutlet } from '../outlet/Community/QuickResponseOutlet'
 export const router = createBrowserRouter([
     {
       path: '/',
-      element: <CrimeProvider><PublicModule /></CrimeProvider>,
+      element: <LoginModule />,
       errorElement: <ErrorComponent />
     },
     {
-      path: 'login',
-      element: <LoginModule />,
+      path: 'report',
+      element: <CrimeProvider><PublicModule /></CrimeProvider>,
       errorElement: <ErrorComponent />
     },
     {

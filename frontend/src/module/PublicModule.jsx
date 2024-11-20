@@ -220,7 +220,7 @@ export default function PublicModule() {
             {/* <div className='relative flex-1 flex justify-center'> */}
             <div className="flex min-h-screen justify-center items-center">
                 <div className='flex-1 bg-gradient-to-l from-src to-prc rounded-r-lg p-10 text-sec-text flex flex-col justify-center z-10'>
-                    <NavLink to={'login'} replace={true}>
+                    <NavLink to={'/'} replace={true}>
                         <Logo />
                     </NavLink>
                     <div className='mt-6 text-4xl font-bold '>Crime Report</div>

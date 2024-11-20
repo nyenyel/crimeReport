@@ -77,7 +77,7 @@ export default function LoginModule() {
             <div className='relative flex-1 flex justify-end'>
                 <div className='flex-1'></div>
                 <div className='flex-1 bg-gradient-to-l from-src to-prc rounded-lg p-10 text-sec-text flex flex-col justify-center z-10'>
-                    <NavLink to={'/'}>
+                    <NavLink to={'/report'}>
                         <Logo />
                     </NavLink>
                     <div className='mt-14 text-4xl font-bold '>Welcome</div>
