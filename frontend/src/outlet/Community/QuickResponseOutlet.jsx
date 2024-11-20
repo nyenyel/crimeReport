@@ -139,10 +139,12 @@ export function QuickResponseOutlet() {
     const[reportForm, setReportForm] = useState({
         info: {
             lib_status_id: 4,
-            title: '',
-            desc: '',
-            reporter_name: '',
-            category: '',
+            title: 'Quick Response',
+            desc: 'Quick Response',
+            reporter_name: 'Quick Response',
+            category: 'Quick Response',
+            dispatch_user: nearest,
+            reporter_account: user?.data?.id
         },
         location: {
             long: location?.long,
@@ -186,7 +188,7 @@ export function QuickResponseOutlet() {
         setLoading(true)
         const login = async () => {
             try{
-                const response = await axios.post(crud.concat('report'), reportForm, {
+                const response = await apiClient.post(crud.concat('quick-response'), reportForm, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                     }
@@ -209,6 +211,26 @@ export function QuickResponseOutlet() {
         login()
         // console.log(reportForm)
     }
+
+    useEffect(()=> {
+        if(nearest){
+
+            setReportForm((prev) => ({
+                ...prev,
+                info: {
+                    ...prev.info,
+                    reporter_account: user?.data?.id,
+                    dispatch_user: nearest 
+                },
+                location: {
+                    ...prev.location,
+                    long: location.long,
+                    lat: location.lat,
+                }
+            }));
+        }
+
+    }, [user?.data?.id, ,location, nearest])
 
     return (
         <>
@@ -244,11 +266,11 @@ export function QuickResponseOutlet() {
                         <Logo />
                     </NavLink> */}
                     <div className='mt-6 text-4xl font-bold '>Quick Response</div>
-                    <div className='mt-1 text-lg '>Please describe the crime your reporting.</div>
+                    <div className='mt-1 text-lg hidden '>Please describe the crime your reporting.</div>
                     <div className='mt-1 mb-5 flex mr-2 text-red-800 text-xl'> <p className='mr-1'>WARNING!!!</p>Upon sending this report the nearest Police officer will be notify about the report and be dispatched immidietly to your location.</div>
 
                     <form className=' w-full' onSubmit={handleSubmmit}>
-                        <div className='flex flex-col'>
+                        <div className='flex flex-col hidden'>
                             <div className=''>
                                 <label className='title text-sm '>Full Name</label>
                                 <input
@@ -324,15 +346,14 @@ export function QuickResponseOutlet() {
                             <label className='title mt-2 text-sm '>{`Identification (Any type of ID PhileHalt, NationalID, School ID, etc.)`}</label>
                             <input
                                 type="file"
-                                required
+                                
                                 accept="image/*, video/*"
                                 className=' bg-white p-2 rounded text-black'
                                 onChange={handleIdentification}
                             />
                         </div>
-                        <div className="flex mt-2">
+                        <div className="flex mt-2 hidden">
                             <input 
-                                required
                                 type="checkbox" 
                                 id="privacyAgreement" 
                                 checked={privacyAndTerms}
@@ -456,12 +477,12 @@ function findNearestUser(users, reportLocation) {
     let nearestUser = null;
     let smallestDistance = Infinity;
 
-    users.forEach(user => {
+    users?.forEach(user => {
         const userLocation = user?.location;
 
         if (userLocation) {
-            const distance = L.latLng(reportLocation.lat, reportLocation.long).distanceTo(
-                L.latLng(userLocation.lat, userLocation.long)
+            const distance = L.latLng(reportLocation?.lat, reportLocation?.long).distanceTo(
+                L.latLng(userLocation?.lat, userLocation?.long)
             );
 
             if (distance < smallestDistance) {
