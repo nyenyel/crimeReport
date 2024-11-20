@@ -232,6 +232,7 @@ export function ReportOutlet() {
                                 <input
                                     onChange={handleChange}
                                     type='text'
+                                    required
                                     name='reporter_name'
                                     placeholder='Full Name'
                                     className='px-4 py-2 rounded text-black border-2 bg-white w-full'
@@ -239,7 +240,7 @@ export function ReportOutlet() {
                                 <div className='flex-1 flex-col flex mt-2'>
                                     <label className='title text-sm '>Address</label>
                                     <div className='flex'>
-                                        <select name="addressmun" value={selectedMunicipality} onChange={handleMunicipalityChange} className='px-4 py-2 rounded text-black border-2 mr-2 bg-white w-full'>
+                                        <select name="addressmun" required value={selectedMunicipality} onChange={handleMunicipalityChange} className='px-4 py-2 rounded text-black border-2 mr-2 bg-white w-full'>
                                             <option value="">Select Municipality</option>
                                             {municipality.map((municipality) => (
                                                 <option key={municipality.municipality} value={municipality.municipality}>
@@ -247,7 +248,7 @@ export function ReportOutlet() {
                                                 </option>
                                             ))}
                                         </select>
-                                        <select name="address" disabled={!barangays.length} onChange={handleChange } className='px-4 py-2 rounded text-black border-2 bg-white w-full'>
+                                        <select name="address" required disabled={!barangays.length} onChange={handleChange } className='px-4 py-2 rounded text-black border-2 bg-white w-full'>
                                             <option value="">Select Barangay</option>
                                             {barangays.map((barangay) => (
                                                 <option key={barangay} value={barangay}>
@@ -261,7 +262,7 @@ export function ReportOutlet() {
                                 <div className='flex gap-2 my-2'>
                                     <div className='flex-1'>
                                         <label className='title text-sm'>Select Crime Category</label>
-                                        <select name='title' value={selectedCategory} onChange={handleCategoryChange} className='px-4 py-2 rounded text-black border-2 bg-white w-full'>
+                                        <select name='title' value={selectedCategory} required onChange={handleCategoryChange} className='px-4 py-2 rounded text-black border-2 bg-white w-full'>
                                             <option value="">-- Select a Category --</option>
                                             {crimeCategories?.map((cat, index) => (
                                                 <option key={index} value={cat.category}>{cat.category}</option>
@@ -270,7 +271,7 @@ export function ReportOutlet() {
                                     </div>
                                     <div className='flex-1'>
                                         <label className='title text-sm'>Select Crime Type</label>
-                                        <select onChange={handleChange} name='category' disabled={!types.length} className='px-4 py-2 rounded text-black border-2 bg-white w-full'>
+                                        <select onChange={handleChange} required name='category' disabled={!types.length} className='px-4 py-2 rounded text-black border-2 bg-white w-full'>
                                             <option value="">-- Select a Type --</option>
                                             {types?.map((type, index) => (
                                                 <option key={index} value={type}>{type}</option>
@@ -285,6 +286,7 @@ export function ReportOutlet() {
                                 <textarea
                                     rows={5}
                                     onChange={handleChange}
+                                    required
                                     type='text'
                                     name='desc'
                                     placeholder='Describe the crime being reported'
@@ -294,6 +296,7 @@ export function ReportOutlet() {
                             <label className='title mt-2 text-sm '>Evidence</label>
                             <input
                                 type="file"
+                                required
                                 multiple
                                 accept="image/*, video/*"
                                 className=' bg-white p-2 rounded text-black'

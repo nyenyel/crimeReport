@@ -19,7 +19,7 @@ export default function SideBar() {
                 localStorage.removeItem('token')
                 localStorage.removeItem('role')
                 setToken(null)
-                nav('/login')
+                nav('/')
                 console.log('token')
             }
         } catch (error) {

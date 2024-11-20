@@ -6,7 +6,7 @@ export default function ResponseMessage({message, desc, isLogin = false}) {
 
     const handleNav = () => {
         if(isLogin){
-            nav('/login')
+            nav('/')
         } else{
             nav('/admin/user')
         }

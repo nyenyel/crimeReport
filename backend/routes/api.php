@@ -57,6 +57,8 @@ Route::prefix('v1')->group(function () {
             Route::put('location/{location}', [AuthController::class, 'changeLocation']);
             Route::put('status-station/{station}', [LibStationController::class, 'statusStation']);
             Route::get('get-pnp', [UserController::class, 'getPNP']);
+            Route::get('get-community', [UserController::class, 'getCommunity']);
+            Route::get('get-all-pnp', [UserController::class, 'getAllPNP']);
             Route::get('pnp-report/{user}', [ReportController::class, 'pnpReport']);
             Route::get('pnp-resolved/{user}', [ReportController::class, 'pnpResolved']);
             Route::get('pnp-unresolved/{user}', [ReportController::class, 'pnpUnresolved']);

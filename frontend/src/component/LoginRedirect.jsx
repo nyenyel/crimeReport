@@ -6,7 +6,7 @@ export default function LoginRedirect() {
     const {token} = useContext(AppContext)
     return (
         <>
-        {token == null &&(<Navigate to={'/login'} replace={true}/>)}
+        {token == null &&(<Navigate to={'/'} replace={true}/>)}
         </>
     )
 }

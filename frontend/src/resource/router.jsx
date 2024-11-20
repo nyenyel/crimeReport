@@ -26,9 +26,11 @@ import PNPResolvedOutlet from '../outlet/PNP/PNPResolvedOutlet'
 import CrimeProvider from '../context/CrimeContext'
 import TrackerModule from '../module/TrackerModule'
 import RegisterAsCommunityModule from '../module/RegisterAsCommunityModule'
+import ListOfUserModule from '../module/ListOfUserModule'
 import CommunityModule from '../module/CommunityModule'
 import MyReportOutlet from '../outlet/Community/MyReportOutlet'
 import { QuickResponseOutlet } from '../outlet/Community/QuickResponseOutlet'
+import CommunityOutlet from '../outlet/CommunityOutlet'
 
 
 export const router = createBrowserRouter([
@@ -99,18 +101,34 @@ export const router = createBrowserRouter([
         },
         {
           path: 'user',
-          element: <UserOutlet />,
+          element: <ListOfUserModule />,
           errorElement: <ErrorComponent />,
-        },
-        {
-          path: 'user/profile/:id',
-          element: <UserProfileOutlet />,
-          errorElement: <ErrorComponent />,
-        },
-        {
-          path: 'user/verify/:id',
-          element: <UserVerifyOutlet />,
-          errorElement: <ErrorComponent />,
+          children: [
+            {
+              path: 'pnp',
+              element: <UserOutlet />,
+              errorElement: <ErrorComponent />
+            },
+            {
+              path: 'community',
+              element: <CommunityOutlet />,
+              errorElement: <ErrorComponent />,
+            },
+            {
+              path: 'profile/:id',
+              element: <UserProfileOutlet />,
+              errorElement: <ErrorComponent />,
+            },
+            {
+              path: 'verify/:id',
+              element: <UserVerifyOutlet />,
+              errorElement: <ErrorComponent />,
+            },
+            {
+              index: true,
+              element: <Navigate to={'pnp'} replace/>
+            }
+          ]
         },
         {
           path: 'station',

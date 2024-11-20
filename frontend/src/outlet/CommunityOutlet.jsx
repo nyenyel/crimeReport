@@ -4,14 +4,14 @@ import { AppContext } from '../context/AppContext'
 import { NavLink } from 'react-router-dom'
 import Loading from '../component/Loading'
 
-export default function UserOutlet() {
+export default function CommunityOutlet() {
   const {apiClient} = useContext(AppContext)
   const [data, setData] = useState()
   const [loading, setLoading] = useState(false)
   const getUsers = async() =>{
     setLoading(true)
     try{
-      const response = await apiClient.get(`v1/crud/get-all-pnp`)
+      const response = await apiClient.get(`v1/crud/get-community`)
       setData(response.data.data)
     } catch (error){
       console.error("Error: ", error.response)
@@ -30,7 +30,7 @@ export default function UserOutlet() {
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table className="w-full text-sm text-left text-gray-500">
                     <caption className="p-5  text-lg font-semibold text-left text-white bg-prc ">
-                        PNP System Users
+                        Community System Users
                         <p className="mt-1 text-sm font-normal text-white text-opacity-90 ">Browse the list of verifed and to be verfied PNP users.</p>
                     </caption>
                     <thead className="text-xs text-white uppercase bg-prc bg-opacity-80 ">
